@@ -11,19 +11,26 @@
         <form action="save.php" method="get">
             <p>Name</p>
             <p><input type="text" name="Name"></p>
+
             <p>Age</p>
             <input type="radio" name="Age" value="&lt18">&lt18
             <input type="radio" name="Age" value="19-35">19-35
             <input type="radio" name="Age" value="36-48">36-48
             <input type="radio" name="Age" value="&gt49">&gt49
+
+            <p>Profession</p>
             <p><input type="text" name="Profession"></p>
+
+            <p>Country</p>
             <select name="Country">
                 <option value="Portugal">Portugal</option>
                 <option value="Poland">Poland</option>
                 <option value="Pakistan">Pakistan</option>
                 <option value="Peru">Peru</option>
             </select>
-            <ul>Interests
+            
+            <p>Interests</p>
+            <ul>
                 
                 <li><input type="checkbox" name="Interests" value= "F1">Formula 1</li>
                 <li><input type="checkbox" name="Interests" value= "F2">Formula 2</li>
@@ -31,9 +38,13 @@
                 <li><input type="checkbox" name="Interests" value= "WEC">WEC</li>
                 
             </ul>
+
             <p>How did the user found out about the site?</p>
-            <textarea name="TellUs" rows="4" cols="50">
-            </textarea>
+            <textarea name="TellUs" rows="4" cols="50"></textarea>
+
+            <p></p>
+            <input type="submit" value="Send">
+
         </form>
     </body>
 
