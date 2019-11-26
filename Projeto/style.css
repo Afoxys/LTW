@@ -18,6 +18,7 @@ body {
 body > header{
     position: fixed;
     z-index: 1000;
+    top: 0em;
 }
 
 body > header {
@@ -35,20 +36,24 @@ body > header a {
 }
 
 #logo {
-    vertical-align: middle;
+    vertical-align: text-top;
 }
 
 #name {
+    margin: 0em;
     color: #4d724d;
+    text-shadow: 2px 2px 2px #4c714c;
     font-weight: bold;
     font-size: 3em;
-    margin: 0.1em 0.1em; 
+    top: 0em;
 }
 
-h1 {
+#slogan {
+    padding: 8em 0em 0em 0em;
     color: #4d724d;
     font-size: 1.5em;
-    margin: 0.4em 2em;
+    font-weight: bold;
+    margin: 0em 3em;
 }
 
 #signup {
@@ -67,7 +72,9 @@ h1 {
 }
 
 #menu ul {
-    margin-top: 0em;
+    top: 120em;
+    z-index: 999;
+    /* margin-top: 0em; */
     list-style-type: none;
     padding: 0em;
 }

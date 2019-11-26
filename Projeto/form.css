@@ -17,6 +17,7 @@ body {
 
 body > header{
     position: fixed;
+    top: 0em;
     z-index: 1000;
 }
 
@@ -67,7 +68,10 @@ h1 {
 }
 
 #menu ul {
-    margin-top: 0em;
+    position: fixed;
+    top: 120px;
+    z-index: 999;
+    /* margin-top: 0em; */
     list-style-type: none;
     padding: 0em;
 }
@@ -108,11 +112,15 @@ h1 {
 }
 
 #form {
-    margin: 4em 0em 0em 0em;
+    font-family: 'Quicksand', sans-serif;
+    /* padding: 10em 20em; */
+    margin: 15% 0em 0em 40%;
 }
 
 #form label{
     margin: 0.25em 0em 0em 1em;
+    list-style-type: none;
+
 }
 
 #form input{
