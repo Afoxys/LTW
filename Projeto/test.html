@@ -1,0 +1,68 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-image {
+  background-image: url("background.jpg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#form {
+    font-family: 'Quicksand', sans-serif;
+    margin:5em 5%; 
+    width:400px;
+    padding:20px;
+    background:#f9f9f9;
+    border:2px solid #333;
+}
+
+#form label{
+    margin: 0.25em 0em 0em 1em;
+    list-style-type: none;
+
+}
+
+#form input{
+    margin: 0.25em 0em 0em 1em;
+}
+
+</style>
+</head>
+<body>
+
+<div class="hero-image">
+    <section id="form">
+        <h1>Quick Search</h1>
+        <form method="post">
+          <label>
+              <br>Where <input type="text" placeholder="Example: Porto" name="titulo">
+          </label>
+          <label>
+              <br>Check-In <input type="date" name="CheckIn">
+          </label>
+          <label>
+              <br>Check-Out <input type="date" name="CheckOut">
+          </label>
+          <label>
+              <br>Guests <input type="number" name="concelho"> <br>
+          </label>
+          <input type="submit" value="Search">
+        </form>
+      </section>
+</div>
+
+<p>Page content..</p>
+<p>Note that this technique will also make the image responsive: Resize the browser window to see the effect.</p>
+
+</body>
+</html>
