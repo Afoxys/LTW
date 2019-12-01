@@ -15,20 +15,16 @@ body {
 .topnav a {
     float: right;
     display: block;
-    color: #e27d60;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
     border-radius: 5px;
+    color: #fafafa;
 }
 
 .topnav a.logo {
     float: left;
-    color: #e27d60;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 2em;
     margin: 0em;
     padding: 0em;
     top: 0em;
@@ -36,8 +32,8 @@ body {
 
 /* Change the color of links on hover */
 .topnav a:hover {
-background-color: #e8a87c;
-color: white;
+background-color: #f0f0f0;
+color: #e8a87c;
 }
 
 /* Style the "active" element to highlight the current page */
@@ -59,46 +55,50 @@ color: white;
     border-radius: 10px;
 }
 
-.background {
-    background-image: url("../background.jpg");
-    background-color: #cccccc;
-    height: 850px;
-    background-position: center;
-    background-repeat: no-repeat;
+.grad {
+    background-image: linear-gradient(#e8a87c, #fafafa);
+    background-repeat: repeat;
     background-size: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#container {
+    margin: auto;
+    width: auto;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+.box {
+    display: block;
+    margin: 0px;
+    white-space: nowrap;
+}
+.box div {
+    display: -moz-inline-stack;
+    margin: 0px;
+    padding: 0px;
+    vertical-align: middle;
+}
+.box p {
     position: relative;
+    width: 100%;
+    top: 12px;
+    z-index: 2;
+    text-align: center;
+    font-size: 1.25em;
+    left: 15px;
+}
+.box img {
+    width: 50%;
 }
 
-#form{
-    font-family: 'Quicksand', sans-serif;
-    margin: 5% 5%; 
-    width:25%;
-    padding:2em;
-    background:#f9f9f9;
-    border-radius: 10px;
-    border: none;
-    box-shadow: 5px 5px 5px 0px #00000030;
-}
-
-#form h1 {
-    font-weight: bold;
-    color: #e27d60;
-}
-
-#form label{
-    margin: 0em 5em 0em 1em;
-    list-style-type: none;
-}
-
-#form input{
-    margin: 0.75em 0em 0em 4em;
-    border-radius: 5px;
-}
-
-footer {
-    /* background-color: #e27d60; */
-    margin: 20em 0em 0em 0em;
-    color: white;
+.wrapper {
+    font-size: 1.5em;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: auto;
 }
 
 
@@ -115,14 +115,10 @@ footer {
     .topnav input[type=text] {
         border: 1px solid #ccc;
     }
-    #form{
-        font-family: 'Quicksand', sans-serif;
-        margin: 5% 5%; 
-        width:75%;
-        background:#f9f9f9;
-        border-radius: 10px;
-        border: none;
-        box-shadow: 5px 5px 5px 0px #00000030;
+    #container {
+        margin: auto;
+        width: auto;
+        text-align: center;
     }
 
 }
