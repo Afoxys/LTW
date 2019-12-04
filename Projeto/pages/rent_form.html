@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-PT">
   <head>
-    <title>RENAME ME</title>    
+    <title>LTW</title>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/form.css" rel="stylesheet">
+    <link rel="icon" href="../logo2.png">
 
   </head>
-  <div class="topnav">
+  <div class="background">
+    <div class="topnav">
       <a class="logo" href="../index.html"><img src = "../logo.png"></a>
       <a href="../pages/register.html">Resgister</a>
       <a href="../pages/login.html">Login</a>
@@ -19,42 +21,37 @@
     <section id="form">
       <h1>Register your house</h1>
       <form method="post">
-        <label>
-            <br>Título <input type="text" name="titulo">
-        </label>
-        <label>
-            <br>Preço Diário <input type="number" name="preco">
-        </label>
-        <label>
-            <br>Distrito <input type="text" name="distrito">
-        </label>
-        <label>
-            <br>Concelho <input type="text" name="concelho">
-        </label>
-        <label>
-            <br>Freguesia <input type="text" name="freguesia">
-        </label> 
-        <label>
-            <br>Rua <input type="text" name="rua">
-        </label>
-        <label>
-            <br>Porta <input type="number" name="porta">
-        </label>
-        <label>
-            <br>Andar <input type="text" name="andar">
-        </label>
-        <label>
-            <br>Codigo Postal <input type="text" pattern = "\d{4}-\d{3}" name="codigopostal">
-        </label>
-        <label><br> Pet Friendly <br>
-          <input type="radio" name="pet" value="no"> No<br>          
-          <input type="radio" name="pet" value="yes" checked> Yes<br>
-        </label>
-        <input type="submit" value="Register">
+        <label><br>Título</label>
+          <input type="text" name="titulo" placeholder="House near city center - 2 Bedrooms">
+        <label><br>Preço Diário</label>
+          <input type="text" name="preco" maxlength="5">
+        <label><br>Distrito</label>
+          <input type="text" name="distrito">
+        <label><br>Concelho</label>
+          <input type="text" name="concelho">
+        <label><br>Freguesia</label> 
+          <input type="text" name="freguesia">
+        <label><br>Rua</label>
+          <input type="text" name="rua">
+        <label><br>Porta</label>
+          <input type="text" name="porta">
+        <label><br>Andar</label>
+          <input type="text" name="andar">
+        <label><br>Codigo Postal</label>
+          <input type="text" pattern = "\d{4}-\d{3}" name="codigopostal">
+        <label><br> Pet Friendly<br></label>
+          <input id="radio" type="radio" name="pet" value="no"checked>No          
+          <input id="radio" type="radio" name="pet" value="yes">Yes<br>
+        <!-- <input id="pseudoClick" type="checkbox" name="moreOpt"><br>
+        <label for="pseudoClick">More Options</label><h2>More text</h2> -->
+        <!-- TODO: Add pseudo click function -->
+        <br><input type="submit" value="Register">
       </form>
     </section>
     <footer>
       <p>Fake footer</p>
     </footer>
+  </div> 
+
   </body>
 </html>

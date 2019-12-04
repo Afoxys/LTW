@@ -25,10 +25,6 @@ body {
 
 .topnav a.logo {
     float: left;
-    color: #e27d60;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 2em;
     margin: 0em;
     padding: 0em;
     top: 0em;
@@ -38,6 +34,10 @@ body {
 .topnav a:hover {
 background-color: #e8a87c;
 color: white;
+}
+
+.topnav a.logo:hover {
+    background-color: transparent;
 }
 
 /* Style the "active" element to highlight the current page */
@@ -60,9 +60,10 @@ color: white;
 }
 
 .background {
-    background-image: url("../background.jpg");
+    overflow: hidden;
+    background-image: url("../background/background.jpg");
     background-color: #cccccc;
-    height: 850px;
+    height: 800px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -104,6 +105,10 @@ footer {
 
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 720px) {
+    .topnav a.logo {
+        float: none;
+    }
+
     .topnav a, .topnav input[type=text] {
         float: none;
         display: block;
@@ -113,16 +118,35 @@ footer {
         padding: 14px;
     }
     .topnav input[type=text] {
+        float: center;
+        text-align: center;
+        margin: 0em;
+        padding: 2% 0em;
+        width: 100%;
         border: 1px solid #ccc;
     }
     #form{
         font-family: 'Quicksand', sans-serif;
-        margin: 5% 5%; 
-        width:75%;
+        margin: 1em 0em;
+        width:96%;
+        padding: 1% 2%;
         background:#f9f9f9;
         border-radius: 10px;
         border: none;
         box-shadow: 5px 5px 5px 0px #00000030;
     }
-
+    #form h1 {
+        font-weight: bold;
+        color: #e27d60;
+    }
+    
+    #form label{
+        margin: 0em 10% 0em 1em;
+        list-style-type: none;
+    }
+    
+    #form input{
+        margin: 0.75em 0em 0em 4em;
+        border-radius: 5px;
+    }
 }

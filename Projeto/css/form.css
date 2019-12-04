@@ -5,10 +5,19 @@ body {
     margin: 0em;
 }
 
+.background {
+  background-image: url("../background/background2.jpg");
+  background-color: #cccccc;
+  height: 850px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
 /* Add a black background color to the top navigation bar */
 .topnav {
     overflow: hidden;
-    background-color: #ffffff;
     font-family: 'Quicksand', sans-serif;
 }
   
@@ -61,19 +70,65 @@ body {
 }
 
 #form {
-    font-family: 'Quicksand', sans-serif;
-    /* padding: 10em 20em; */
-    margin: 15% 0em 0em 40%;
+  font-family: 'Quicksand', sans-serif;
+  margin: 5% 20%; 
+  width:50%;
+  padding:2em;
+  background:#f9f9f9;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 5px 5px 5px 0px #00000030;
+}
+
+#form h1 {
+  text-align: center;
+  color:#e27d60;
+}
+
+label, input {
+  display: inline-block;
 }
 
 #form label{
-    margin: 0.25em 0em 0em 1em;
-    list-style-type: none;
-
+  width:30%;
+  list-style-type: none;
+  /* Positions the label text beside the input */
+  text-align: right;
 }
 
+label + input {
+  width: 50%;
+  /* Large margin-right to force the next element to the new-line
+     and margin-left to create a gutter between the label and input */
+  margin: 0 30% 0 4%;
+}
+
+input + input {
+  float: right;
+}
+
+#radio {
+  /* display: block; */
+  /* TODO: ADD TOGGLE SWITCH */
+  width:2%
+}
+
+/* #pseudoClick {
+  display:none;
+}
+#pseudoClick:checked + label > h2{
+  width: 100px;
+  height: 74px;
+} */
+
 #form input{
+    padding: 0.5em 3em;
     margin: 0.25em 0em 0em 1em;
+}
+
+footer {
+  margin: 10em 0em 0em 0em;
+  color: white;
 }
 
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
