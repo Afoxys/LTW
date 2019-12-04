@@ -1,5 +1,9 @@
 SELECT apelido FROM Utilizador
 WHERE nome == "Nelson";
 
-SELECT apelido, cod_pos_4, casa_desc FROM Utilizador, Casa
-WHERE nome == "Nelson" AND proprietario == utilizadorID AND animais == 0;
+SELECT casa_desc, data_inicio_a, data_fim_a FROM Casa
+NATURAL JOIN Arrendamento
+WHERE casaID == casa AND utilizador == 'afoxys@gmail.com';
+
+SELECT preco_diario, rua FROM Casa
+WHERE proprietario == 'pingdoce23@gmail.com';
