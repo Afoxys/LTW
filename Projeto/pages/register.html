@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/form.css" rel="stylesheet">
-    <link rel="icon" href="../logo2.png">
+    <link rel="icon" href="../icon.png">
 
 
   </head>
@@ -28,7 +28,7 @@
     </nav>
 
     <div class="form">
-      <form>
+      <form method="post">
         <ul class="RegForm">
           <li>
             <label for="first-name">First Name</label>
@@ -45,6 +45,10 @@
           <li>
             <label for="phone">Phone</label>
             <input type="tel" id="phone" placeholder="Enter your phone here">
+          </li>
+          <li>
+            <label for="password">Password</label>
+            <input type="password" id="password" minlength="8" maxlength="32" placeholder="Minimum 8 caracters">
           </li>
           <li>
             <button type="submit">Submit</button>

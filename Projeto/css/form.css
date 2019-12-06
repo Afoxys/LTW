@@ -72,7 +72,7 @@ body {
 #form {
   font-family: 'Quicksand', sans-serif;
   margin: 5% 20%; 
-  width:50%;
+  width:40%;
   padding:2em;
   background:#f9f9f9;
   border-radius: 10px;
@@ -100,7 +100,7 @@ label + input {
   width: 50%;
   /* Large margin-right to force the next element to the new-line
      and margin-left to create a gutter between the label and input */
-  margin: 0 30% 0 4%;
+  /* margin: 0 30% 0 4%; */
 }
 
 input + input {
@@ -165,7 +165,7 @@ input:checked + .slider:before {
 
 /* Rounded sliders */
 .slider.round {
-  margin: 0 3em;
+  margin: 0 30%;
   border-radius: 30px;
 }
 
@@ -174,7 +174,7 @@ input:checked + .slider:before {
 }
 
 #form input{
-    padding: 0.5em 3em;
+    padding: 0.5em 1em;
     margin: 0.25em 0em 0em 1em;
 }
 
