@@ -5,11 +5,18 @@
         <br>Where<input type="text" placeholder="Example: Porto" name="Location">
     </label>
     <label>
-        <br>Check-In <input type="date" name="CheckIn">
+        <br>Check-In <input id="CheckIn" type="date" name="CheckIn">
     </label>
     <label>
-        <br>Check-Out<input type="date" name="CheckOut">
+        <br>Check-Out<input id="CheckOut" type="date" name="CheckOut">
     </label>
+
+    <script>
+        let today = new Date().toISOString().substr(0, 10);
+        document.getElementById("CheckIn").setAttribute("min", today);
+        document.getElementById("CheckOut").setAttribute("min", today);
+    </script>
+
     <label>
         <br>Guests<input type="number" name="Guests" min="1"> <br>
     </label>

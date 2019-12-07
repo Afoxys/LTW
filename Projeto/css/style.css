@@ -51,12 +51,12 @@ color: white;
     background-color: #fafafa;
     box-shadow: 5px 5px 5px 0px #00000030;
     float: right;
-    padding: 6px;
+    padding: 10px;
     border: none;
-    margin-top: 8px;
+    margin-top: 6px;
     margin-right: 40px;
     font-size: 1em;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .background {
@@ -248,7 +248,7 @@ input:checked + .slider:before {
     #form{
         font-family: 'Quicksand', sans-serif;
         margin: 1em 0em;
-        width:96%;
+        width:100%;
         padding: 1% 2%;
         background:#f9f9f9;
         border-radius: 10px;
