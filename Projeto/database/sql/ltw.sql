@@ -6,11 +6,9 @@ DROP TABLE IF EXISTS Arrendamento;
 
 CREATE TABLE Utilizador (
     email TEXT PRIMARY KEY,
-    username VARCHAR(16) NOT NULL UNIQUE,
     nome TEXT NOT NULL,
     apelido TEXT NOT NULL,
-    salt VARCHAR(16) NOT NULL UNIQUE,
-    hash VARCHAR(16) NOT NULL UNIQUE
+    hash TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE Casa (

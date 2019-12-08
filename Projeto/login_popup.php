@@ -109,36 +109,25 @@ color: white;
 }
 
 </style>
-
 </head>
 <body>
 
 <button class="open-button" onclick="openForm()">Login</button>
 
 <div class="form-popup" id="myForm">
-  <form action="/action_page.php" class="form-container">
+  <form id="loginForm" class="form-container">
     <h1>Login</h1>
 
     <label for="email"><b>Email</b></label>
-    <input type="email" placeholder="Enter Email" name="email" required>
+    <input type="email" id="email" placeholder="Enter Email" required>
 
-    <label for="psw"><b>Password</b></label>
-    <input type="password" minlength="8" maxlength="128" placeholder="Enter Password" name="psw" required>
+    <label for="password"><b>Password</b></label>
+    <input type="password" id="password" minlength="8" maxlength="128" placeholder="Enter Password" required>
 
     <button type="submit" class="btn">Login</button>
     <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
   </form>
 </div>
-
-<script>
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
-
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
-}
-</script>
 
 </body>
 </html>

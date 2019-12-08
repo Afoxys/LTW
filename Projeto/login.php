@@ -1,34 +1,62 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
+<?php
+	session_set_cookie_params(0, '/', 'localhost', false, true);
+	session_start();
 
-  <?php include_once('templates/head.php'); ?>
+	include_once('database/connection.php');
+	include_once('database/login_q.php');
 
-  <body>
 
-    <div class="background">
-      
-      <?php include_once('templates/navbar.php'); ?>
+	// function generate_random_token() {
+	// 	return bin2hex(openssl_random_pseudo_bytes(32));
+	// }
 
-      <div class="form">
-        <form>
-          <ul class="form2">
+	$success = false;
+	$userData = NULL;
+	$msg = 'OK';
+	
+	$email = isset($_POST['email']) ? $_POST['email'] : '';
+	$pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
+	
+	if(!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
-            <li>
-              <label for="email">Email</label>
-              <input type="email" id="email" placeholder="Enter your email here">
-            </li>
-            <li>
-                <label for="password">Password</label>
-                <input type="password" id="password" minlength="8" maxlength="32" placeholder="Minimum 8 caracters">
-            </li>
-            <li>
-              <button type="submit">Submit</button>
-            </li>
-          </ul>
-        </form>
-      </div>
+		if(!empty($pwd) && strlen($pwd) >= 8 && strlen($pwd) <= 128) {
+			//debug_insertUser($email, $pwd);
+			$userData = try_authentification($email, $pwd);
+	
+			if($userData !== NULL) {
+				session_regenerate_id(true);
 
-    </div>
-  </body>
-</html>
+				$success = true;
+				$_SESSION['email'] = $userData['email'];
+			}
+			else {
+				$msg = 'Bad Login';
+			}
+		}
+		else {
+			$msg = 'Bad Password';
+		}
+	}
+	else {
+		$msg = 'Bad Email';
+	}
 
+	echo json_encode( array(
+		'success' 	=> $success,
+		'msg' 		=> $msg,
+		'userData' 	=> $userData
+	));
+
+
+	// if (!isset($_SESSION['csrf'])) {
+	//     $_SESSION['csrf'] = generate_random_token();
+	// }
+	
+	// session_regenerate_id(true);
+	// if (isset($_SESSION['email']))
+	// 	echo $_SESSION['email'];
+	// else
+	// 	$_SESSION['email'] = $userData['email'];
+	// return $userData;
+	
+?>
