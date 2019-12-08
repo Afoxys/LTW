@@ -8,6 +8,9 @@ function tryLogin(loginForm) {
     var email = loginForm.email.value;
     var pwd = loginForm.password.value;
 
+    console.log(email);
+    console.log(pwd);
+
     if(email !== null && pwd !== null) {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () { loginSuccess(request); };
@@ -15,7 +18,6 @@ function tryLogin(loginForm) {
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send(encodeForAjax({email: email, pwd: pwd}));
     }
-
 
     event.preventDefault();
 }
@@ -41,16 +43,23 @@ function loginSuccess(request) {
         }
     }
 }
-
-function openForm() {
-    document.getElementById("myForm").style.display = "block";
-  }
   
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+function close_account_panel() {
+    document.getElementById("login-popup").style.display = "none";
 }
 
+function toggle_account_panel() {
+    let display = document.getElementById("login-popup").style.display;
+    document.getElementById("login-popup").style.display = (display == "block") ? "none" : "block";
+}
 
+document.addEventListener('click', function (event) {
+    if (!document.getElementById('login-popup').contains(event.target) && !event.target.matches('.account-button'))
+        close_account_panel();
+});
 
-let loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', function() { tryLogin(loginForm); });
+let login_container = document.getElementById('login-container');
+login_container.addEventListener('submit', function() { tryLogin(login_container); });
+
+let account_btn = document.getElementById('account-button');
+account_btn.addEventListener('click', toggle_account_panel);
