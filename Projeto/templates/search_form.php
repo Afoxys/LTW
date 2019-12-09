@@ -1,5 +1,5 @@
 <section id="form">
-    <h1>Quick Search</h1>
+    <h1>Book your stay</h1>
     <form method="post">
     <label>
         <br>Where<input type="text" placeholder="Example: Porto" name="Location">

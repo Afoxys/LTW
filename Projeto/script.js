@@ -45,21 +45,39 @@ function loginSuccess(request) {
 }
   
 function close_account_panel() {
-    document.getElementById("login-popup").style.display = "none";
+    document.getElementById("account-popup").style.display = "none";
 }
 
 function toggle_account_panel() {
-    let display = document.getElementById("login-popup").style.display;
-    document.getElementById("login-popup").style.display = (display == "block") ? "none" : "block";
+    let account_popup = document.getElementById("account-popup");
+    account_popup.style.display = (account_popup.style.display == "block") ? "none" : "block";
 }
 
 document.addEventListener('click', function (event) {
-    if (!document.getElementById('login-popup').contains(event.target) && !event.target.matches('.account-button'))
+    if (!document.getElementById('account-popup').contains(event.target) && !event.target.matches('#account-button'))
         close_account_panel();
 });
 
+let account_popup = document.getElementById('account-popup');
+console.log(account_popup);
 let login_container = document.getElementById('login-container');
-login_container.addEventListener('submit', function() { tryLogin(login_container); });
+console.log(login_container);
+if(login_container != null) {
+    login_container.addEventListener('submit', function() { tryLogin(login_container); });
+}
+else {
+    let logged_container = document.getElementById('logged-container');
+    console.log(logged_container);
+    if(logged_container != null) {
+        logged_container.addEventListener('submit', function (event) {
+            document.location = 'logout.php';
+            event.preventDefault();
+        });
+    }
+}
 
 let account_btn = document.getElementById('account-button');
+console.log(account_btn);
+
 account_btn.addEventListener('click', toggle_account_panel);
+
