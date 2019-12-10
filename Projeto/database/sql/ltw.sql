@@ -1,57 +1,56 @@
 PRAGMA foreign_keys = ON;
 
-DROP TABLE IF EXISTS Utilizador;
-DROP TABLE IF EXISTS Casa;
-DROP TABLE IF EXISTS Arrendamento;
+DROP TABLE IF EXISTS User;
+DROP TABLE IF EXISTS House;
+DROP TABLE IF EXISTS Rent;
 
-CREATE TABLE Utilizador (
+CREATE TABLE User (
     email TEXT PRIMARY KEY,
-    nome TEXT NOT NULL,
-    apelido TEXT NOT NULL,
-    telemovel INTEGER DEFAULT NULL,
+    firstname TEXT NOT NULL,
+    lastname TEXT NOT NULL,
+    phone INTEGER DEFAULT NULL,
     hash TEXT NOT NULL UNIQUE
 );
 
-CREATE TABLE Casa (
-    casaID INTEGER PRIMARY KEY AUTOINCREMENT,
-    proprietario TEXT NOT NULL,
-    data_inicio_c DATETIME NOT NULL,
-    data_fim_c DATETIME NOT NULL,
+CREATE TABLE House (
+    houseID INTEGER PRIMARY KEY AUTOINCREMENT,
+    owner TEXT NOT NULL,
+    availability_start DATETIME NOT NULL,
+    availability_end DATETIME NOT NULL,
 
-    distrito TEXT NOT NULL,
-    concelho TEXT NOT NULL,
-    freguesia TEXT NOT NULL,
-    rua TEXT NOT NULL,
-    porta INTEGER NOT NULL,
-    andar TEXT NOT NULL,
-    cod_pos_4 INTEGER NOT NULL,
-    cod_pos_3 INTEGER NOT NULL,
+    city TEXT NOT NULL,
+    region TEXT NOT NULL,
+    country TEXT NOT NULL,
+    street TEXT NOT NULL,
+    door TEXT NOT NULL,
+    floor TEXT NOT NULL,
+    postal_code TEXT NOT NULL,
 
-    titulo VARCHAR(64) NOT NULL,
-    preco_diario FLOAT NOT NULL,
-    n_camas INTEGER NOT NULL,
-    cozinha BOOLEAN NOT NULL,
+    title VARCHAR(64) NOT NULL,
+    daily_price FLOAT NOT NULL,
+    n_beds INTEGER NOT NULL,
+    kitchen BOOLEAN NOT NULL,
     internet BOOLEAN NOT NULL,
-    ar_condicionado BOOLEAN NOT NULL,
-    mobilidade_reduzida BOOLEAN NOT NULL,
-    animais BOOLEAN NOT NULL DEFAULT FALSE,
-    img_count TEXT NOT NULL,
-    casa_desc TEXT,
+    air_con BOOLEAN NOT NULL,
+    low_mobility BOOLEAN NOT NULL,
+    animals BOOLEAN NOT NULL DEFAULT FALSE,
+    img_count INTEGER NOT NULL,
+    house_description TEXT,
 
-    FOREIGN KEY(proprietario) REFERENCES Utilizador(email),
-    CHECK(data_fim_c > data_inicio_c)
+    FOREIGN KEY(owner) REFERENCES User(email),
+    CHECK(availability_end > availability_start)
 );
 
-CREATE TABLE Arrendamento (
-    utilizador TEXT NOT NULL,
-    casa INTEGER NOT NULL,
-    data_inicio_a DATETIME NOT NULL,
-    data_fim_a DATETIME NOT NULL,
+CREATE TABLE Rent (
+    user TEXT NOT NULL,
+    house INTEGER NOT NULL,
+    rent_start DATETIME NOT NULL,
+    rent_end DATETIME NOT NULL,
     rating INTEGER DEFAULT NULL,
-    comentario TEXT DEFAULT NULL,
-    PRIMARY KEY(casa, data_inicio_a),
-    FOREIGN KEY(utilizador) REFERENCES Utilizador(email),
-    FOREIGN KEY(casa) REFERENCES Casa(casaID),
-    CHECK(data_fim_a > data_inicio_a),
+    comments TEXT DEFAULT NULL,
+    PRIMARY KEY(house, rent_start),
+    FOREIGN KEY(user) REFERENCES User(email),
+    FOREIGN KEY(house) REFERENCES House(houseID),
+    CHECK(rent_end > rent_start),
     CHECK(rating BETWEEN 1 AND 5)
 );

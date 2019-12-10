@@ -2,8 +2,8 @@
 	//session_set_cookie_params(0, '/', '', false, true);
 	session_start();
 
-	include_once('database/connection.php');
-	include_once('database/account_q.php');
+	include_once('../database/connection.php');
+	include_once('../database/account_q.php');
 
 
 	// function generate_random_token() {
@@ -37,7 +37,7 @@
 
 			$success = true;
 			$_SESSION['email'] = $userData['email'];
-			$_SESSION['firstname'] = $userData['nome'];
+			$_SESSION['firstname'] = $userData['firstname'];
 		}
 		else {
 			$msg = 'Bad Login';

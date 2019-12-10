@@ -31,7 +31,6 @@
     <section id="images">
       <?php foreach ($images as $image) { ?>
       <article class="image">
-        <header><h2><?=$image['title']?></h2></header>
         <a href="view_image.php?id=<?=$image['id']?>">
           <img src="images/thumbs_small/<?=$image['id']?>.jpg" width="200" height="200">
         </a>

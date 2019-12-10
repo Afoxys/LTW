@@ -6,8 +6,8 @@
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   // Insert image data into database
-  $stmt = $dbh->prepare("INSERT INTO images VALUES(NULL, ?)");
-  $stmt->execute(array($_POST['image_title']));
+  $stmt = $dbh->prepare("INSERT INTO images VALUES(NULL)");
+  $stmt->execute();
 
   // Get image ID
   $id = $dbh->lastInsertId();

@@ -4,7 +4,7 @@
 
 		<div class="form">
 			<form id="signup-container">
-				<ul class="RegForm">
+				<ul class="">
 					<li>
 						<label for="email">Email</label>
 						<input type="email" id="email" placeholder="Enter your email here">

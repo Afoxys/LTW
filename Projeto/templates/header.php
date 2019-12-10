@@ -11,8 +11,8 @@
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="css/style.css" rel="stylesheet">
-        <link href="css/popup.css" rel="stylesheet">
+		<link href="/LTW/Projeto/css/style.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->   
+        <link href="/LTW/Projeto/css/popup.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->
 
 		<!-- <?php
 		switch ($_SERVER["SCRIPT_NAME"]) {
@@ -24,7 +24,8 @@
 		}
 		?> -->
 
-		<link rel="icon" href="icon.png">
+		<link rel="icon" href="/LTW/Projeto/favicon.ico">
+		<link rel="shortcut icon" href="/LTW/Projeto/favicon.ico">
 		<script src="script.js" defer></script>
 	</head>
 

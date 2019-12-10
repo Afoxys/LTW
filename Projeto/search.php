@@ -9,12 +9,16 @@
 
 		<div class="box">
 			<div>
-				Good Enough - Center Porto
-				<img src="images/960x0.jpg">
+				<div id="houseImg"><img src="houseimgs/h1.jpg"></div>
+				<div id="Title">Good Enough - Center Porto</div>
+                <div id="Rating">4.4</div>
+                <div id="Price">120€</div>
 			</div>
 			<div>
-				Has rats -Near Ribeira do Porto
-				<img src="images/MHA.JR_201708_038.jpg">
+                <div id="houseImg"><img src="houseimgs/h2.jpg"></div>
+				<div id="Title">Has rats -Near Ribeira do Porto</div>
+                <div id="Rating">4.2</div>
+                <div id="Price">100€</div>
 			</div>
 			<div>
 				Might be haunted - Suburbs Porto

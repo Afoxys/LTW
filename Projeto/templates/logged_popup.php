@@ -89,23 +89,12 @@ body {font-family: 'Quicksand', sans-serif;}
 </div>
 
 <!-- <script>
-function open_form() {
-  document.getElementById("myForm").style.display = "block";
-}
 
-function close_form() {
-  document.getElementById("myForm").style.display = "none";
-}
 function open_settings() {
   document.getElementById("myForm").style.display = "none";
 }
 function open_management() {
   document.getElementById("myForm").style.display = "none";
-} -->
+}
 
-<!-- let logout = document.getElementById('myForm');
-logout.addEventListener('submit', function (event) {
-    document.location = 'logout.php';
-}); -->
-
-<!-- </script> -->
+</script> -->

@@ -63,12 +63,4 @@
 		'msg' 		=> $msg
 	));
     
-
-    // outras coisas:
-        // mover tudo para pasta images
-        // mover codigo php para pasta "actions" -> "actions/login", "actions/logout", "actions/register"
-        // rever nomes register/signup/create_account
-        // Em modo "not login", botao "rent your house" da navbar manda para "create_account.php" (apos criar, redirecionar para onde?)
-        // Em modo "not login", se permitir "search", eventual botao "rent this house" manda para "create_account.php"
-            //(apos criar, redirecionar para onde? guardar o pedido de rent feito anteriormente? como?)
 ?>

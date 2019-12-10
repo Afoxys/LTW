@@ -3,7 +3,7 @@
 function debug_insertUser($email, $pwd) {
     global $db;
     $options = ['cost' => 12];
-    $stmt = $db->prepare('INSERT INTO Utilizador VALUES (?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO User VALUES (?, ?, ?, ?)');
     $stmt->execute(array(
       $email,
       'Nelson',
@@ -19,7 +19,7 @@ function try_insert_user($email, $first, $last, $phone, $pwd) {
 
     global $db;
     $options = ['cost' => 12];
-    $stmt = $db->prepare('INSERT INTO Utilizador VALUES (?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO User VALUES (?, ?, ?, ?, ?)');
     try {
         $stmt->execute(array(
             $email,
@@ -44,7 +44,7 @@ function try_authentification($email, $pwd) {
         return NULL;
 
     global $db;
-    $stmt = $db->prepare('SELECT * FROM Utilizador WHERE email = ?');
+    $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
     $stmt->execute(array($email));
     $userData = $stmt->fetch();
     if ($userData !== false && password_verify($pwd, $userData['hash']))

@@ -20,7 +20,6 @@
       <h1><a href="index.php">Images</a></h1>
     </header>
     <article class="image single">
-      <header><h2><?=$image['title']?></h2></header>
       <a href="images/originals/<?=$image['id']?>.jpg">
         <img src="images/thumbs_medium/<?=$image['id']?>.jpg">
       </a>

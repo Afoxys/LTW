@@ -1,6 +1,12 @@
+<style>
+ h1 {
+     user-select:none;
+ }
+</style>
+
 <section id="form">
     <h1>Book your stay</h1>
-    <form method="post">
+    <form method="get">
     <label>
         <br>Where<input type="text" placeholder="Example: Porto" name="Location">
     </label>
