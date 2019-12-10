@@ -11,12 +11,12 @@
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="/LTW/Projeto/css/style.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->   
-        <link href="/LTW/Projeto/css/popup.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->
+		<link href="/LTW/css/style.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->   
+        <link href="/LTW/css/popup.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->
 
 		<!-- <?php
 		switch ($_SERVER["SCRIPT_NAME"]) {
-			case "/LTW/Projeto/rent_house.php":
+			case "/LTW/rent_house.php":
 			?> <link href="css/form.css" rel="stylesheet"> <?php
 			break;
 			default:
@@ -24,8 +24,8 @@
 		}
 		?> -->
 
-		<link rel="icon" href="/LTW/Projeto/favicon.ico">
-		<link rel="shortcut icon" href="/LTW/Projeto/favicon.ico">
+		<link rel="icon" href="/LTW/favicon.ico">
+		<link rel="shortcut icon" href="/LTW/favicon.ico">
 		<script src="script.js" defer></script>
 	</head>
 

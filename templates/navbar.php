@@ -1,6 +1,6 @@
 <div class="topnav">
 
-	<a class="logo" href="index.php"><img src = "/LTW/Projeto/images/logo.png"></a>
+	<a class="logo" href="index.php"><img src = "/LTW/images/logo.png"></a>
 
 	<?php include_once('account_popup.php'); ?>
 

@@ -74,7 +74,7 @@ body {font-family: 'Quicksand', sans-serif;}
 
 
 <!-- TODO: Get user image via query -->
-<button id="account-button"><img src="userimgs/pic-1.png"></button>
+<button id="account-button"><img src="images/profile.png"></button>
 
 <div id="account-popup">
   <form id="logged-container">
