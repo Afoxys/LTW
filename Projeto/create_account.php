@@ -2,7 +2,6 @@
 
 	<div class="background2">
 
-		<?php include_once('templates/navbar.php'); ?>
 		<div class="form">
 			<form id="signup-container">
 				<ul class="RegForm">

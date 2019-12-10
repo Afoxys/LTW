@@ -2,9 +2,7 @@
 
 	<a class="logo" href="index.php"><img src = "logo.png"></a>
 
-	<?php
-		include_once('account_popup.php');
-	?>
+	<?php include_once('account_popup.php'); ?>
 
 	<a href="https://github.com/Afoxys/LTW">About us</a>
 

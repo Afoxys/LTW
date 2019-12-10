@@ -35,7 +35,7 @@ CREATE TABLE Casa (
     ar_condicionado BOOLEAN NOT NULL,
     mobilidade_reduzida BOOLEAN NOT NULL,
     animais BOOLEAN NOT NULL DEFAULT FALSE,
-    imagens TEXT NOT NULL,
+    img_count TEXT NOT NULL,
     casa_desc TEXT,
 
     FOREIGN KEY(proprietario) REFERENCES Utilizador(email),

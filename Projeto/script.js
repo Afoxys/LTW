@@ -11,35 +11,9 @@ function try_login(login_form) {
     if(email !== null && pwd !== null) {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () { login_success(request); };
-        request.open("POST", "login.php", true);
+        request.open("POST", "actions/login.php", true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send(encode_for_ajax({email: email, pwd: pwd}));
-    }
-
-    event.preventDefault();
-}
-
-function try_signup(signup_form) {
-    var email = signup_form.email.value;
-    var first = signup_form.firstname.value;
-    var last = signup_form.firstname.value;
-    var phone = signup_form.phone.value;
-    var pwd = signup_form.password.value;
-    var pwd_confirm = signup_form.passwordconfirm.value;
-
-    console.log(email);
-    console.log(first);
-    console.log(last);
-    console.log(phone);
-    console.log(pwd);
-    console.log(pwd_confirm);
-
-    if(email !== null && first !== null && last !== null && pwd !== null && pwd_confirm !== null) {
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function () { signup_success(request); };
-        request.open("POST", "register.php", true);
-        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(encode_for_ajax({email: email, first: first, last: last, phone: phone, pwd: pwd, pwd_confirm: pwd_confirm}));
     }
 
     event.preventDefault();
@@ -65,6 +39,32 @@ function login_success(request) {
             console.log(requestData.msg);
         }
     }
+}
+
+function try_signup(signup_form) {
+    var email = signup_form.email.value;
+    var first = signup_form.firstname.value;
+    var last = signup_form.lastname.value;
+    var phone = signup_form.phone.value;
+    var pwd = signup_form.password.value;
+    var pwd_confirm = signup_form.passwordconfirm.value;
+
+    console.log(email);
+    console.log(first);
+    console.log(last);
+    console.log(phone);
+    console.log(pwd);
+    console.log(pwd_confirm);
+
+    if(email !== null && first !== null && last !== null && pwd !== null && pwd_confirm !== null) {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function () { signup_success(request); };
+        request.open("POST", "actions/register.php", true);
+        request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        request.send(encode_for_ajax({email: email, first: first, last: last, phone: phone, pwd: pwd, pwd_confirm: pwd_confirm}));
+    }
+
+    event.preventDefault();
 }
 
 function signup_success(request) {
@@ -102,13 +102,16 @@ function toggle_account_panel() {
 
 // Toggle account panel
 let account_btn = document.getElementById('account-button');
-account_btn.addEventListener('click', toggle_account_panel);
+if(account_btn != null) {
 
-// Close account panel everywhere
-document.addEventListener('click', function (event) {
-    if (!document.getElementById('account-popup').contains(event.target) && !event.target.matches('#account-button'))
-        close_account_panel();
-});
+    // Close account panel everywhere
+    document.addEventListener('click', function (event) {
+        if (!document.getElementById('account-popup').contains(event.target) && !event.target.matches('#account-button'))
+            close_account_panel();
+    });
+
+    account_btn.addEventListener('click', toggle_account_panel);
+}
 
 let login_container = document.getElementById('login-container');
 if(login_container != null) {
@@ -120,7 +123,7 @@ else {
     let logged_container = document.getElementById('logged-container');
     if(logged_container != null) {
         logged_container.addEventListener('submit', function (event) {
-            document.location = 'logout.php';
+            document.location = 'actions/logout.php';
             event.preventDefault();
         });
     }

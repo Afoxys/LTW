@@ -78,8 +78,7 @@ body {font-family: 'Quicksand', sans-serif;}
 
 <div id="account-popup">
   <form id="logged-container">
-    <!-- TODO: Get username via query -->
-    <h1>Welcome, username</h1>
+    <h1>Welcome, <?php echo $_SESSION['firstname']; ?></h1>
 
     <button type="button" class="btn settings"  onclick="open_settings()">Account settings</button>
 
