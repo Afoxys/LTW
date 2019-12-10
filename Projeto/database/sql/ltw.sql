@@ -8,6 +8,7 @@ CREATE TABLE Utilizador (
     email TEXT PRIMARY KEY,
     nome TEXT NOT NULL,
     apelido TEXT NOT NULL,
+    telemovel INTEGER DEFAULT NULL,
     hash TEXT NOT NULL UNIQUE
 );
 

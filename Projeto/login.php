@@ -3,7 +3,7 @@
 	session_start();
 
 	include_once('database/connection.php');
-	include_once('database/login_q.php');
+	include_once('database/account_q.php');
 
 
 	// function generate_random_token() {

@@ -12,6 +12,6 @@
 
         <button type="submit" id="login-btn">Login</button>
 
-        <button type="button" id="register-btn" onclick="location.href='register.php';" >Don't have an account?</button>
+        <button type="button" id="register-btn" onclick="location.href='create_account.php';" >Don't have an account?</button>
     </form>
 </div>
