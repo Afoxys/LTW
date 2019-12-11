@@ -1,17 +1,5 @@
 <?php
 
-function debug_insertUser($email, $pwd) {
-    global $db;
-    $options = ['cost' => 12];
-    $stmt = $db->prepare('INSERT INTO User VALUES (?, ?, ?, ?)');
-    $stmt->execute(array(
-      $email,
-      'Nelson',
-      'Gregório',
-      password_hash($pwd, PASSWORD_DEFAULT, $options))
-    );
-}
-
 function try_insert_user($email, $first, $last, $phone, $pwd) {
 
     if($email === NULL || $first === NULL || $last === NULL || $phone === NULL || $pwd === NULL)

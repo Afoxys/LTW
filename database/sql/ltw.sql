@@ -22,23 +22,25 @@ CREATE TABLE House (
     region TEXT NOT NULL,
     country TEXT NOT NULL,
     street TEXT NOT NULL,
-    door TEXT NOT NULL,
+    door INTEGER NOT NULL,
     floor TEXT NOT NULL,
     postal_code TEXT NOT NULL,
 
     title VARCHAR(64) NOT NULL,
     daily_price FLOAT NOT NULL,
     n_beds INTEGER NOT NULL,
+    animals BOOLEAN NOT NULL DEFAULT FALSE,
     kitchen BOOLEAN NOT NULL,
     internet BOOLEAN NOT NULL,
     air_con BOOLEAN NOT NULL,
     low_mobility BOOLEAN NOT NULL,
-    animals BOOLEAN NOT NULL DEFAULT FALSE,
+    washing_machine BOOLEAN NOT NULL,
     img_count INTEGER NOT NULL,
     house_description TEXT,
 
     FOREIGN KEY(owner) REFERENCES User(email),
-    CHECK(availability_end > availability_start)
+    CHECK(availability_end > availability_start),
+    UNIQUE(city, region, country, street, door, floor, postal_code)
 );
 
 CREATE TABLE Rent (

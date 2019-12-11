@@ -16,68 +16,70 @@
 </style>
 
 <section id="registerform">
-    <!-- First form page -->
-    <form action="../Projeto/upload/upload.php" method="post" enctype="multipart/form-data">
-        <div id="FirstPage">
-        <h1>Register your house</h1>
-        <label><br>Title</label>
-            <input type="text" name="title" maxlength="64" placeholder="Small title for your house..." required>
-        <label><br>Daily Price</label>
-            <input  id="daily_price" type="number" step="0.01" name="price" maxlength="5" required>
-        <label><br>City</label>
-            <input type="text" name="city" required>
-        <label><br>State / Region</label>
-            <input type="text" name="region" required>
-        <label><br>Country</label> 
-            <input type="text" name="country" required>
-        <label><br>Street</label>
-            <input type="text" name="street" required>
-        <label><br>Door</label>
-            <input type="text" name="door" required>
-        <label><br>Floor</label>
-            <input type="text" name="floor">
-        <label><br>Postal Code</label>
-            <input type="text" pattern = "\d{4}-\d{3}" name="postalcode" required>
-        <br><input type="button" value="Continue" onclick="open_second_page()">
+    <form id="my-rent-container">
 
-        </div>
-        <!-- First form page -->
-        <!-- Second form page -->
-        <div id="SecondPage">
+        <div id="FirstPage"> <!-- First form page -->
+            <h1>Register your house</h1>
+            <label><br>Title</label>
+            <input type="text" id="title" maxlength="64" placeholder="Small title for your house..." required>
+            <label><br>Daily Price</label>
+            <input  id="daily_price" type="number" step="0.01" id="price" maxlength="5" required>
+            <label><br>City</label>
+            <input type="text" id="city" required>
+            <label><br>State / Region</label>
+            <input type="text" id="region" required>
+            <label><br>Country</label> 
+            <input type="text" id="country" required>
+            <label><br>Street</label>
+            <input type="text" id="street" required>
+            <label><br>Door</label>
+            <input type="text" id="door" required>
+            <label><br>Floor</label>
+            <input type="text" id="floor">
+            <label><br>Postal Code</label>
+            <input type="text" pattern = "\d{4}-\d{3}" id="postal_code" required>
+            <br><input type="button" value="Continue" onclick="open_second_page()">
+        </div> <!-- First form page -->
+
+        
+        <div id="SecondPage"> <!-- Second form page -->
             <label><br>Description</label>
-            <textarea name="description" id="description" maxlength="256" clos="50" rows="10" placeholder="Small description of your house..."></textarea>
+            <textarea id="description" maxlength="500" clos="50" rows="10" placeholder="Small description of your house..."></textarea>
             <label><br>Number of beds</label>
-            <input type="number" name="bed_numb" min="1">
-            <label>Upload image</label>
-            <input type="text" name="image_title">
-            <input type="file" name="image"  accept="image/jpg, image/jpeg" multiple required>
+            <input type="number" id="bed_number" min="1">
             <br><input type="button" value="Back" onclick="back_first_page()">
             <input type="button" value="Continue" class="continue"  onclick="open_third_page()">
-        </div>
-        <!-- Second form page -->
-        <!-- Third form page -->
-        <div id="ThirdPage">
-        <label class="switch">Pet Friendly
-            <input type="checkbox" name="Pet">
-            <span class="slider round"></span>
-        </label>
-        <label class="switch">WIFI
-            <input type="checkbox" name="Pet">
-            <span class="slider round"></span>
-        </label>
-        <label class="switch">Washing Machine
-            <input type="checkbox" name="Pet">
-            <span class="slider round"></span>
-        </label>
-        <label class="switch">Pet Friendly
-            <input type="checkbox" name="Pet">
-            <span class="slider round"></span>
-        </label>
-        <br><input type="button" value="Back" onclick="back_second_page()"><br>
-        <br><input type="submit" value="Register">
-        </div>
-    </form>
-    <!-- Third form page -->
+        </div> <!-- Second form page -->
+
+        <div id="ThirdPage"><!-- Third form page -->
+            <label class="switch">Pet Friendly
+                <input id="pet" type="checkbox" value="off">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">Kitchen
+                <input id="kitchen" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">WIFI
+                <input id="wifi" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">Air conditioning
+                <input id="air_con" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">Low Mobility
+                <input id="low_mobility" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <label class="switch">Washing Machine
+                <input id="washing" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+            <br><input type="button" value="Back" onclick="back_second_page()"><br>
+            <br><input type="submit" value="Register">
+        </div><!-- Third form page -->
+        
     </form>
 </section>
 

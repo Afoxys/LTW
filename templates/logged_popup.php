@@ -72,8 +72,6 @@ body {font-family: 'Quicksand', sans-serif;}
 
 </style>
 
-
-<!-- TODO: Get user image via query -->
 <button id="account-button"><img src="images/profile.png"></button>
 
 <div id="account-popup">
