@@ -48,7 +48,7 @@ CREATE TABLE Rent (
     house INTEGER NOT NULL,
     rent_start DATETIME NOT NULL,
     rent_end DATETIME NOT NULL,
-    rating INTEGER DEFAULT NULL,
+    rating INTEGER NOT NULL,
     comments TEXT DEFAULT NULL,
     PRIMARY KEY(house, rent_start),
     FOREIGN KEY(user) REFERENCES User(email),

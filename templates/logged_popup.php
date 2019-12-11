@@ -1,6 +1,6 @@
 <style>
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-body {font-family: 'Quicksand', sans-serif;}
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+body {font-family: 'Roboto', sans-serif;}
 * {box-sizing: border-box;}
 
 /* Button used to open the contact form - fixed at the bottom of the page */
