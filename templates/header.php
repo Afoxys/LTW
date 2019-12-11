@@ -11,12 +11,12 @@
 
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="/LTW/css/style.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->   
-        <link href="/LTW/css/popup.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->
+		<link href="css/style.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->   
+        <link href="css/popup.css" rel="stylesheet">  <!-- Presentation: Absolute path to prevent path relative stylesheet import exploit -->
 
 		<!-- <?php
 		switch ($_SERVER["SCRIPT_NAME"]) {
-			case "/LTW/rent_house.php":
+			case "rent_house.php":
 			?> <link href="css/form.css" rel="stylesheet"> <?php
 			break;
 			default:
@@ -24,8 +24,8 @@
 		}
 		?> -->
 
-		<link rel="icon" href="/LTW/favicon.ico">
-		<link rel="shortcut icon" href="/LTW/favicon.ico">
+		<link rel="icon" href="favicon.ico">
+		<link rel="shortcut icon" href="favicon.ico">
 		<script src="script.js" defer></script>
 	</head>
 
@@ -34,6 +34,6 @@
 		<!-- DEBUG -->
 		<?php
 		if(isset($_SESSION['email']))
-			echo $_SESSION['email'];
+			print_r($_SESSION);
 		?>
 		<!-- DEBUG -->

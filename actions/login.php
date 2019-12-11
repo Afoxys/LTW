@@ -43,30 +43,6 @@
 			$msg = 'Bad Login';
 		}
 	}
-	
-	// if(!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
-	// 	if(!empty($pwd) && strlen($pwd) >= 8 && strlen($pwd) <= 128) {
-	// 		//debug_insertUser($email, $pwd);
-	// 		$userData = try_authentification($email, $pwd);
-	
-	// 		if($userData !== NULL) {
-	// 			session_regenerate_id(true);
-
-	// 			$success = true;
-	// 			$_SESSION['email'] = $userData['email'];
-	// 		}
-	// 		else {
-	// 			$msg = 'Bad Login';
-	// 		}
-	// 	}
-	// 	else {
-	// 		$msg = 'Bad Password';
-	// 	}
-	// }
-	// else {
-	// 	$msg = 'Bad Email';
-	// }
 
 	echo json_encode( array(
 		'success' 	=> $success,
