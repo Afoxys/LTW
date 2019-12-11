@@ -30,10 +30,3 @@
 	</head>
 
 	<body>
-
-		<!-- DEBUG -->
-		<?php
-		if(isset($_SESSION['email']))
-			print_r($_SESSION);
-		?>
-		<!-- DEBUG -->

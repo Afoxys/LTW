@@ -78,7 +78,7 @@ body {font-family: 'Roboto', sans-serif;}
   <form id="logged-container">
     <h1>Welcome, <?php echo $_SESSION['firstname']; ?></h1>
 
-    <button type="button" class="btn settings"  onclick="open_settings()">Account settings</button>
+    <button type="button" class="btn settings"  onclick="window.location.href='account_settings.php'">Account settings</button>
 
     <button type="button" class="btn houses" onclick="open_management()">Manage my houses</button>
 

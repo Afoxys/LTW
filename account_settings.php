@@ -3,32 +3,39 @@
 include_once('templates/header.php');
 include_once('templates/navbar.php');
 
-// include_once('database/house_q.php');
+include_once('database/account_q.php');
 
-// $house_data = try_get_house_by_id($_GET['id']);
+if(!isset($_SESSION['email'])) {
+    header('Location: index.php');
+}
+
+$user_data = try_get_user($_SESSION['email']);
 
 ?>
 
-    <h1>Welcome, <?php echo $_SESSION['firstname']; ?></h1>
+    <h1>Welcome, <?php echo $user_data['firstname']; ?></h1>
+    <h2>To make a change, type your current password, fill any field you want to change and click change</h2>
 
-    <form method="post">
-        <label id="change_firstname">Change first name</label>
-        <input type="text" id="firstname" placeholder=<?php echo $_SESSION['firstname']; ?>>
-    </form>
-    <form method="post">
-        <label id="change_lastname">Change last name</label>
-        <input type="text" id="lastname">
+    <form action="actions/change_user.php" method="POST" enctype="application/x-www-form-urlencoded">
+        <label for="current_pwd">Current Password</label>
+        <input type="password" name="current_pwd" minlength="8" maxlength="128" placeholder="Minimum 8 caracters">
+        <hr>
+        <br><label for="firstname">Change first name</label>
+        <input type="text" name="firstname" placeholder=<?php echo $user_data['firstname']; ?>>
+        <br><label for="lastname">Change last name</label>
+        <input type="text" name="lastname" placeholder=<?php echo $user_data['lastname']; ?>>
+        <br><label for="phone">Change phone number</label>
+        <input type="tel" name="phone" placeholder=<?php echo $user_data['phone']; ?>>
+        <br><label for="new_pwd">New password</label>
+        <input type="password" name="new_pwd" placeholder="Minimum 8 caracters">
 
+        <br><button type="submit">Change</button>
     </form>
-    <form method="post">
-        <label id="change_phone">Change phone number</label>
-        <input type="tel" id="phone">
 
-    </form>
-    <form method="post">
-        <label id="change_password">Change password</label>
-        <input type="password" id="password" minlength="8" maxlength="32" placeholder="Minimum 8 caracters">
-
-    </form>
+    <?php
+        if(isset($_GET['code'])) {
+            ?> <h3>Change <?php echo $_GET['code'] ?> </h3> <?php
+        }
+    ?>
 
 <?php include_once('templates/footer.php'); ?>

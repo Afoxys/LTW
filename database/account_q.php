@@ -43,4 +43,36 @@ function try_authentification($email, $pwd) {
         return NULL;
 }
 
+function try_get_user($email) {
+
+    if($email === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM User WHERE email = ?');
+    $stmt->execute(array($email));
+    $user_data = $stmt->fetch();
+    if ($user_data !== false)
+        return $user_data;
+    else
+        return NULL;
+}
+
+function try_update_user($email, $first, $last, $phone, $pwd) {
+    if($email === NULL || $first === NULL || $last === NULL || $phone === NULL || $pwd === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('UPDATE User SET firstname=?, lastname=?, phone=?, hash=? WHERE email = ?');
+    $stmt->execute(array(
+        $first,
+        $last,
+        $phone,
+        $pwd,
+        $email
+    ));
+
+    return 'OK';
+}
+
 ?>
