@@ -2,7 +2,6 @@
 	//session_set_cookie_params(0, '/', '', false, true);
 	session_start();
 
-	include_once('../database/connection.php');
 	include_once('../database/house_q.php');
 
 
@@ -17,7 +16,7 @@
 			return 'Bad Title';
 		}
 
-		if(empty($price) || $price < 1 || $price > 99999) {
+		if(empty($price) || $price < 1 || $price > 999999) {
 			return 'Bad Price';
 		}
 		

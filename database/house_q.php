@@ -1,5 +1,8 @@
 <?php
 
+include_once('connection.php');
+
+
 function try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal, $description, $beds,
                         $pet, $kitchen, $wifi, $air_con, $low_mobility, $washing) {
 
@@ -45,6 +48,36 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
             throw $e;
         }
     }
+}
+
+function try_get_house_by_id($id) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM House WHERE houseID = ?');
+    $stmt->execute(array($id));
+    $house_data = $stmt->fetch();
+    if ($house_data !== false)
+        return $house_data;
+    else
+        return NULL;
+}
+
+function try_get_house_rating_by_id($id) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT AVG(rating) as avg_rat FROM Rent INNER JOIN House ON house = houseID WHERE house = ?');
+    $stmt->execute(array($id));
+    $house_data = $stmt->fetch();
+    if ($house_data !== false)
+        return $house_data;
+    else
+        return NULL;
 }
 
 ?>

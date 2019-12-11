@@ -2,7 +2,6 @@
 	//session_set_cookie_params(0, '/', '', false, true);
 	session_start();
 
-	include_once('../database/connection.php');
     include_once('../database/account_q.php');
     
     function check_params($email, $first, $last, $phone, $pwd, $pwd_confirm) {

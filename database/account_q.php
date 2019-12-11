@@ -1,5 +1,7 @@
 <?php
 
+include_once('connection.php');
+
 function try_insert_user($email, $first, $last, $phone, $pwd) {
 
     if($email === NULL || $first === NULL || $last === NULL || $phone === NULL || $pwd === NULL)
