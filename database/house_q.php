@@ -80,4 +80,13 @@ function try_get_house_rating_by_id($id) {
         return NULL;
 }
 
+function getAllHousesByCity($city) {
+    global $db;
+    $stmt = $db->prepare('
+      SELECT * From House WHERE city = ?
+      ');
+    $stmt->execute(array($city));
+    return $stmt->fetchAll();
+  }
+
 ?>

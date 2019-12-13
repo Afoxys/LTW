@@ -232,6 +232,72 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.house_simple {
+    text-decoration: none;
+}
+
+.house_simple:visited {
+    color: black;
+}
+
+.house_simple:hover article{
+    border-color: orange;
+}
+
+.house_simple:active {
+    color: orange;
+}
+
+.house_simple article{
+    border-style: solid;
+    border-width: normal;
+    border-color: black;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 400px auto auto;
+    grid-template-rows: 10% 80% 10%;
+}
+
+.house_simple img {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.house_simple header {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 0%;
+    padding-left: 2%;
+    font-weight: bold;
+}
+
+.house_simple #rating {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 0%;
+    padding: 0%;
+    text-align: right;
+}
+
+.house_simple #price {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin: 0%;
+    padding: 0%;
+    text-align: right;
+}
+
+
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 720px) {
     .topnav a.logo {
