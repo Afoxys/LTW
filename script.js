@@ -156,6 +156,8 @@ function try_add_house(my_rent_container) {
 
     var description = my_rent_container.description.value;
     var beds = my_rent_container.bed_number.value;
+    var availability_start = my_rent_container.availability_start.value;
+    var availability_end = my_rent_container.availability_end.value;
 
     var pet = my_rent_container.pet.checked;
     var kitchen = my_rent_container.kitchen.checked;
@@ -179,7 +181,7 @@ function try_add_house(my_rent_container) {
         request.open("POST", "actions/add_house.php", true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send(encode_for_ajax({title: title, price: price, city: city, region: region, country: country, street: street,
-            floor: floor, door: door, postal: postal, description: description, beds: beds,
+            floor: floor, door: door, postal: postal, description: description, beds: beds, availability_start: availability_start, availability_end: availability_end,
             pet: pet, kitchen: kitchen, wifi: wifi, air_con: air_con, low_mobility: low_mobility, washing: washing
         }));
     }
@@ -201,7 +203,8 @@ function add_house_success(request) {
         }
 
         if(requestData.success) {
-            //location.href = 'index.php';
+            // console.log(requestData.id);
+            location.href = 'view_house.php?id=' + requestData.id;
         }
         else {
             console.log(requestData.msg);

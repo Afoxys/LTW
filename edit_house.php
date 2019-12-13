@@ -1,50 +1,23 @@
+<?php include_once('templates/header.php'); ?>
+<?php include_once('templates/navbar.php'); ?>
+
 <style>
-    #SecondPage, #ThirdPage{
-        Display: none;
+    #registerform {
+        height: 10em;
     }
-    textarea {
-        max-width: 25em;
-    }
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
-    input[type=number] {
-        -moz-appearance:textfield; /* Firefox */
-    }
-
-    #ThirdPage {
+    #form_display, #close_form_button {
         display: none;
-        flex-direction: column;
-    }
-
-    #ThirdPage label{
-        margin: 1em 0;
-    }
-
-    #ThirdPage span{
-        left: 10em;
-    }
-
-    #sub_button {
-        display: inline-block;
-    }
-
-    #last_buttons {
-        display: inline-block;
-    }
-    
-    #register_button {
-        float: right;
     }
 </style>
 
+<h1>Welcome, <?php echo $user_data['firstname']; ?></h1>
+
 <section id="registerform">
-    <form id="my-rent-container" method="post">
-        <!-- First form page -->
-        <div id="FirstPage">
-            <h1>Register your house</h1>
+    <form method="post">
+
+            <h1>Edit your house listing</h1><input type="button" id="open_form_button" value="open" onclick="open_form()">
+            <input type="button" id="close_form_button" value="close" onclick="close_form()">
+            <div id="form_display">
             <label><br>Title</label>
                 <input type="text" id="title" maxlength="64" placeholder="Small title for your house..." required>
             <label><br>Daily Price</label>
@@ -63,12 +36,6 @@
                 <input type="text" id="floor">
             <label><br>Postal Code</label>
                 <input type="text" pattern = "\d{4}-\d{3}" id="postal_code" required>
-            <br><input type="button" value="Continue" onclick="open_second_page()">
-        </div>
-        <!-- First form page -->
-
-        <!-- Second form page -->
-        <div id="SecondPage">
             <label><br>Description</label>
                 <textarea id="description" maxlength="500" clos="50" rows="10" placeholder="Small description of your house..."></textarea>
             <label><br>Number of beds</label>
@@ -77,13 +44,6 @@
                 <input id="availability_start" type="date" required>
             <label><br>House available end</label>
                 <input id="availability_end" type="date" required>
-            <br><input type="button" value="Back" onclick="back_first_page()">
-            <input type="button" value="Continue" class="continue"  onclick="open_third_page()">
-        </div>
-        <!-- Second form page -->
-
-        <!-- Third form page -->
-        <div id="ThirdPage">
             <label class="switch">Pet Friendly
                 <input id="pet" type="checkbox">
                 <span class="slider round"></span>
@@ -108,31 +68,37 @@
                 <input id="washing" type="checkbox">
                 <span class="slider round"></span>
             </label>
-            <div id="last_buttons">
-                <br><input type="button" value="Back" onclick="back_second_page()">
-                <input type="submit" id="register_btn" value="Register">
+            <input type="submit" id="register_btn" value="Register">
             </div>
-        </div>
-        <!-- Third form page -->
-    </form>
     </form>
 </section>
 
+<section id="registerform">
+    <h2>Upload a photo</h2>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit" value="Upload">
+    </form>
+</section>
+    
+
+<?php include_once('templates/footer.php'); ?>
+
 <script>
-    function open_second_page() {
-        document.getElementById("FirstPage").style.display = "none";
-        document.getElementById("SecondPage").style.display = "block";
+    function open_form() {
+        document.getElementById("form_display").style.display = "block";
+        document.getElementById("open_form_button").style.display = "none";
+        document.getElementById("close_form_button").style.display = "block";
+        document.getElementById("registerform").style.height = "70em";
     }
-    function open_third_page() {
-        document.getElementById("SecondPage").style.display = "none";
-        document.getElementById("ThirdPage").style.display = "flex";
-    }
-    function back_second_page() {
-        document.getElementById("SecondPage").style.display = "block";
-        document.getElementById("ThirdPage").style.display = "none";
-    }
-    function back_first_page() {
-        document.getElementById("FirstPage").style.display = "block";
-        document.getElementById("SecondPage").style.display = "none";
+    function close_form() {
+        document.getElementById("form_display").style.display = "none";
+        document.getElementById("open_form_button").style.display = "block";
+        document.getElementById("close_form_button").style.display = "none";
+        document.getElementById("registerform").style.height = "10em";
+
+
+        
+        
     }
 </script>

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
-body {font-family: 'Quicksand', sans-serif;}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+body {font-family: 'Open Sans', sans-serif;}
 * {box-sizing: border-box;}
 
 #account-button {
@@ -33,7 +33,7 @@ body {font-family: 'Quicksand', sans-serif;}
 /* Add styles to the login container */
 #login-container, #logged-container {
     border-radius: 2px;
-    max-width: 335px;
+    max-width: 337.6px;
     padding: 10px;
     background-color: #f1f1f1aa;
 }

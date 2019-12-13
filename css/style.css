@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
 body {
     background-color: #ffffff;
     margin: 0em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 /* Add a black background color to the top navigation bar */
@@ -80,7 +80,7 @@ color: white;
 }
 
 #form{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 5% 5%; 
     width:30em;
     padding:2em;
@@ -114,7 +114,7 @@ color: white;
 }
 
 #registerform {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 2% 0 0 25%; 
     width:40%;
     height:36em;
@@ -125,7 +125,7 @@ color: white;
     box-shadow: 5px 5px 5px 0px #00000030;
 }
 
-#registerform h1 {
+#registerform h1, h2 {
     text-align: center;
     color:#e27d60;
 }

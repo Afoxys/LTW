@@ -16,7 +16,7 @@ body {font-family: 'Roboto', sans-serif;}
 
 /* Add styles to the form container */
 #logged-container {
-    max-width: 323.5px;
+    max-width: 315.35px;
     padding: 10px;
     font-size: 0.75em;
 }
@@ -80,7 +80,7 @@ body {font-family: 'Roboto', sans-serif;}
 
     <button type="button" class="btn settings"  onclick="window.location.href='account_settings.php'">Account settings</button>
 
-    <button type="button" class="btn houses" onclick="open_management()">Manage my houses</button>
+    <button type="button" class="btn houses" onclick="window.location.href='manage_my_houses.php'">Manage my houses</button>
 
     <button type="submit" id="logout-btn"class="btn">Logout</button>
   </form>

@@ -9,7 +9,8 @@
 		return (strcasecmp($bool, 'true') == 0 || strcasecmp($bool, 'false') == 0);
 	}
 	
-	function check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal, $description, $beds,
+    function check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal,
+        $description, $beds, $start, $end,
 		$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing
 	) {
 		if(empty($title) || strlen($title) < 2 || strlen($title) > 64) {
@@ -55,6 +56,11 @@
 		if(empty($beds) || $beds < 1 || $beds > 999) {
 			return 'Bad Beds';
 		}
+		
+		$now = strtotime(date("Y-m-d")) + 3600;
+        if(empty($start) || empty($end) || $start > $end || $start < $now) {
+			return 'Bad Dates';
+		}
 
 		if(!is_bool_str($pet) || !is_bool_str($kitchen) || !is_bool_str($wifi) || !is_bool_str($air_con) || !is_bool_str($low_mobility) || !is_bool_str($washing)) {
 			return 'Bad Amenities';
@@ -64,7 +70,8 @@
 	}
 
 	$success = false;
-	$msg = 'OK';
+    $msg = 'OK';
+    $id = '-1';
 	
 	$title = isset($_POST['title']) ? $_POST['title'] : '';
 	$price = isset($_POST['price']) ? $_POST['price'] : '';
@@ -77,6 +84,8 @@
 	$postal = isset($_POST['postal']) ? $_POST['postal'] : '';
 	$description = isset($_POST['description']) ? $_POST['description'] : '';
 	$beds = isset($_POST['beds']) ? $_POST['beds'] : '';
+	$start = isset($_POST['availability_start']) ? strtotime($_POST['availability_start']) : '';
+	$end = isset($_POST['availability_end']) ? strtotime($_POST['availability_end']) : '';
 	$pet = isset($_POST['pet']) ? $_POST['pet'] : false;
 	$kitchen = isset($_POST['kitchen']) ? $_POST['kitchen'] : false;
 	$wifi = isset($_POST['wifi']) ? $_POST['wifi'] : false;
@@ -84,23 +93,28 @@
 	$low_mobility = isset($_POST['low_mobility']) ? $_POST['low_mobility'] : false;
 	$washing = isset($_POST['washing']) ? $_POST['washing'] : false;
 
-	$msg = check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal, $description, $beds,
+    $msg = check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal, 
+                        $description, $beds, $start, $end,
 						$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
 
 	if($msg === 'OK') {
 
 		// insert house
-		$msg = try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal, $description, $beds,
+		$msg = try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal,
+		$description, $beds, $start, $end,
 		$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
 
 		if($msg === 'OK') {
 			$success = true;
+            $id = get_last_house_id();
 		}
 	}
-	
+    
+    
 	echo json_encode( array(
 		'success' 	=> $success,
-		'msg' 		=> $msg
+        'msg' 		=> $msg,
+        'id'        => $id
 	));
 	
 ?>

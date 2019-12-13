@@ -3,7 +3,8 @@
 include_once('connection.php');
 
 
-function try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal, $description, $beds,
+function try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal,
+                        $description, $beds, $start, $end,
                         $pet, $kitchen, $wifi, $air_con, $low_mobility, $washing) {
 
     // check if any param is null here
@@ -17,8 +18,8 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
 
             NULL,
             $_SESSION['email'],
-            1000,
-            2000,
+            $start,
+            $end,
 
             $city,
             $region,
@@ -87,6 +88,32 @@ function getAllHousesByCity($city) {
       ');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
-  }
+}
+
+function try_get_houses_by_owner_email($email) {
+
+    if($email === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM House WHERE owner = ?');
+    $stmt->execute(array($email));
+    $houses_data = $stmt->fetchAll();
+    if ($houses_data !== false)
+        return $houses_data;
+    else
+        return NULL;
+}
+
+function get_last_house_id() {
+    global $db;
+    $stmt = $db->prepare('SELECT seq FROM sqlite_sequence WHERE name="House"');
+    $stmt->execute();
+    $house_id = $stmt->fetch();
+    if ($house_id !== false)
+        return $house_id['seq'];
+    else
+        return 0;
+}
 
 ?>
