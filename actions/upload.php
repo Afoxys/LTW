@@ -1,10 +1,10 @@
 <?php
   // Get image ID
-  $id = $dbh->lastInsertId();
+  include_once('../database/house_q.php');
+  $id = get_last_house_id();
 
   // Generate filenames for original, small and medium files
-  $originalFileName = "images/originals/$id.jpg";
-  $smallFileName = "images/thumbs_small/$id.jpg";
+  $originalFileName = "../images/houses/originals/$id.jpg";
   $mediumFileName = "images/thumbs_medium/$id.jpg";
 
   // Move the uploaded file to its final destination

@@ -60,7 +60,6 @@
 
     #house_selection {
         padding: 1em;
-
     }
 
 </style>

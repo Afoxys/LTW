@@ -1,5 +1,6 @@
 <?php include_once('templates/header.php'); ?>
 <?php include_once('templates/navbar.php'); ?>
+<?php include_once('database/house_q.php'); ?>
 
 <style>
     #registerform {
@@ -11,6 +12,7 @@
 </style>
 
 <?php 
+
     $id = $_POST['id'];
     echo $id;
     $house_data = try_get_house_by_id($id);
@@ -23,7 +25,7 @@
             <input type="button" id="close_form_button" value="close" onclick="close_form()">
             <div id="form_display">
             <label><br>Title</label>
-                <input type="text" id="title" maxlength="64" value="<?php echo $house_data['title']?>" required>
+                <input type="text" id="title" maxlength="64" placeholder="<?php echo $house_data['title']?>" required>
             <label><br>Daily Price</label>
                 <input  id="daily_price" type="number" step="0.01" id="price" maxlength="5" required>
             <label><br>City</label>
@@ -79,7 +81,7 @@
 
 <section id="registerform">
     <h2>Upload a photo</h2>
-    <form action="upload/upload.php" method="post" enctype="multipart/form-data">
+    <form action="actions/upload.php" method="post" enctype="multipart/form-data">
         <input type="file" name="image"  accept="image/jpg, image/jpeg">
         <input type="submit" value="Upload">
     </form>
