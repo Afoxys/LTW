@@ -33,7 +33,7 @@ body {font-family: 'Roboto', sans-serif;}
   opacity: 0.8;
 }
 
-#logged-container .settings, #logged-container .houses{
+#logged-container .settings, #logged-container .houses, #logged-container .rent_list{
   background-color: #f1f1f1bb;
   color: black;
 }
@@ -81,6 +81,8 @@ body {font-family: 'Roboto', sans-serif;}
     <button type="button" class="btn settings"  onclick="window.location.href='account_settings.php'">Account settings</button>
 
     <button type="button" class="btn houses" onclick="window.location.href='manage_my_houses.php'">Manage my houses</button>
+    
+    <button type="button" class="btn rent_list" onclick="window.location.href='my_rent_listing.php'">Rent listings</button>
 
     <button type="submit" id="logout-btn"class="btn">Logout</button>
   </form>

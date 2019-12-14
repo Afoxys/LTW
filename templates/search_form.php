@@ -6,26 +6,25 @@
 
 <section id="form">
     <h1>Book your stay</h1>
-    <form name="search_form" method="post" action="search_city.php">
+    <form id="search_form" method="POST" action="search_results.php">
     <label>
         <br>Where<input type="text" placeholder="Example: Porto" name="Location">
     </label>
     <label>
-        <br>Check-In <input id="CheckIn" type="date" name="CheckIn">
+        <br>Check-In <input id="CheckIn" type="date" name="checkin">
     </label>
     <label>
-        <br>Check-Out<input id="CheckOut" type="date" name="CheckOut">
+        <br>Check-Out<input id="CheckOut" type="date" name="checkout">
     </label>
-
-    <script>
-        let today = new Date().toISOString().substr(0, 10);
-        document.getElementById("CheckIn").setAttribute("min", today);
-        document.getElementById("CheckOut").setAttribute("min", today);
-    </script>
-
     <label>
         <br>Guests<input type="number" name="Guests" min="1"> <br>
     </label>
     <input type="submit" value="Search">
     </form>
 </section>
+
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+    document.getElementById("CheckIn").setAttribute("min", today);
+    document.getElementById("CheckOut").setAttribute("min", today);
+</script>

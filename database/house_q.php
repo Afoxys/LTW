@@ -89,11 +89,75 @@ function getAllHousesByCity($city) {
 }
 
 // function getAllHousesBySearch($location,$checkin,$checkout,$guests) {
-//     global $db;
-//     $stmt = $db->prepare('SELECT * From House WHERE city = ?');
-//     $stmt->execute(array($city));
+//     global $db;    
+//     $stmt = $db->prepare("SELECT houseID FROM House
+//                         WHERE houseID NOT IN 
+//                         (SELECT house FROM Rent WHERE (? < ?) AND (? <= rent_end AND ? >= rent_start))
+//                         AND availability_start <= ? AND availability_end > ?
+//                         AND n_beds >= ? AND city LIKE '%?%' AND region LIKE '%?%' AND country LIKE '%?%'"
+//     );
+//     $stmt->execute(array(
+//         $checkin,
+//         $checkout,
+//         $checkin,
+//         $checkout,
+//         $checkin,
+//         $checkout,
+//         $guests,
+//         $location,
+//         $location,
+//         $location
+//     ));
 //     return $stmt->fetchAll();
 // }
+
+// function getAllHousesBySearch($location, $checkin, $checkout, $guests) {
+//     global $db;    
+//     $stmt = $db->prepare("SELECT houseID FROM House
+//                         WHERE houseID NOT IN 
+//                         (SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start))
+//                         AND availability_start <= :checkin AND availability_end > :checkout
+//                         AND n_beds >= :guests AND city LIKE '%:location%' AND region LIKE '%:location%' AND country LIKE '%:location%'"
+//     );
+//     $stmt->bindParam(':location', $location);
+//     $stmt->bindParam(':checkin', $checkin);
+//     $stmt->bindParam(':checkout', $checkout);
+//     $stmt->bindParam(':guests', $guests);
+//     $stmt->execute();
+//     return $stmt->fetchAll();
+// }
+
+function getAllHousesByTimedSearch($location, $checkin, $checkout, $guests) {
+    echo $location;
+    echo $checkin;
+    echo $checkout;
+    echo $guests;
+    global $db;    
+    $stmt = $db->prepare("SELECT houseID FROM House
+                        WHERE houseID NOT IN 
+                        (SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start))
+                        AND availability_start <= :checkin AND availability_end > :checkout
+                        AND n_beds >= :guests"
+    );
+    $stmt->bindParam(':checkin', $checkin);
+    $stmt->bindParam(':checkout', $checkout);
+    $stmt->bindParam(':guests', $guests);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function getAllHousesBySearch($location, $guests) {
+    echo $location;
+    echo $guests;
+    global $db;    
+    $stmt = $db->prepare("SELECT * FROM House
+                        WHERE n_beds >= :guests
+                        AND availability_end > strftime('%s','now')"
+    );
+    $stmt->bindParam(':guests', $guests);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 
 function try_get_houses_by_owner_email($email) {
 
@@ -121,4 +185,31 @@ function get_last_house_id() {
         return 0;
 }
 
+function try_rent_house($email, $id, $checkin, $checkout) {
+    global $db;
+
+    $stmt = $db->prepare('INSERT INTO Rent VALUES (?, ?, ?, ?, NULL, NULL)');
+    $stmt->execute(array(
+        $email,
+        $id,
+        $checkin,
+        $checkout
+    ));
+    return 'OK'; 
+}
+
+function try_get_rents_by_owner_email($email) {
+
+    if($email === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT house,rent_start,rent_end FROM House INNER JOIN Rent ON houseID=house WHERE owner= ?');
+    $stmt->execute(array($email));
+    $houses_rent_data = $stmt->fetchAll();
+    if ($houses_rent_data !== false)
+        return $houses_rent_data;
+    else
+        return NULL;
+}
 ?>

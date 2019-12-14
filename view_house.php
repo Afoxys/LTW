@@ -12,6 +12,9 @@ include_once('templates/navbar.php');
 include_once('database/house_q.php');
 
 $house_data = try_get_house_by_id($_POST['id']);
+if( isset($_SESSION['firstname'])){
+    $email = $_SESSION['email'];
+}
 
 $house_rat = try_get_house_rating_by_id($_POST['id']);
 if($house_rat['avg_rat'] === NULL) {
@@ -20,28 +23,30 @@ if($house_rat['avg_rat'] === NULL) {
     $rating = $house_rat['avg_rat'];
 }
 
-if( isset($_POST['city'])){ 
-    $city = $_POST['city'];
+if(empty($_POST['checkin'])){
 }
 
-else if( isset($_POST['location'])) {
-    $location = $_POST['location'];
-    echo $location;
-
-
+else if(!empty($_POST['checkin'])) {
     $checkin = $_POST['checkin'];
-    echo $checkin;
-
     $checkout = $_POST['checkout'];
-    echo $checkout;
-    $guests = $_POST['guests'];
-    echo $guests;
 }
+
+
+
 
 ?>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+
+    <?php
+    if( !isset($_SESSION['firstname'])){
+        ?>
+        <div id="">
+        </div>
+        <?php
+    }?>
+
 
     <h1><?php echo $house_data['title']?></h1>
     <img id="house_img" alt="house image" src="images/houses/h<?php echo $_POST['id']?>.jpg">
@@ -60,21 +65,46 @@ else if( isset($_POST['location'])) {
         </ul>
     </div>
 
-    <form action="rented_success.php" method="post" id="user_rent_action">
-        Price: <?php echo $house_data['daily_price']?>€/night
-        <br>
-        <input type="hidden" name="location" value="<?php echo $location?>">
-        <input type="hidden" name="checkin" value="<?php echo $checkin?>">
-        <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-        <input type="hidden" name="guests" value="<?php echo $guests?>">
-        <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
-        <input type="submit" value="Rent this house" onclick="rent_action()">
-    </form>
+    <?php
+        if(empty($_POST['checkin'])){
+           ?>
+           <form action="rented_success.php" method="post" id="user_rent_action">
+                Price: <?php echo $house_data['daily_price']?>€/night
+                <br>
+                <input type="hidden" name="email" value="<?php echo $email?>">
+                <label>
+                    <br>Check-In <input id="checkin" type="date" name="checkin" required>
+                </label>
+                <label>
+                    <br>Check-Out<input id="checkout" type="date" name="checkout" required>
+                </label>
+                <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                <input type="submit" value="Rent this house">
+             </form>
+           <?php
+        }
+        else if(!empty($_POST['checkin'])){
+            ?>
+            <form action="rented_success.php" method="post" id="user_rent_action">
+                Price: <?php echo $house_data['daily_price']?>€/night
+                <br>
+                <input type="hidden" name="email" value="<?php echo $email?>">
+                <input type="hidden" name="checkin" value="<?php echo $checkin?>">
+                <input type="hidden" name="checkout" value="<?php echo $checkout?>">
+                <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                <input type="submit" value="Rent this house">
+            </form>
+            <?php
+        }
+    ?>
+
 
 <?php include_once('templates/footer.php'); ?>
 
+
+
 <script>
-    function rent_action() {
-        console.log("You have rented this house successfully");
-    }
+    let today = new Date().toISOString().substr(0, 10);
+    document.getElementById("checkin").setAttribute("min", today);
+    document.getElementById("checkout").setAttribute("min", today);
 </script>

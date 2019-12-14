@@ -10,7 +10,11 @@
     }
 </style>
 
-<h1>Welcome, <?php echo $user_data['firstname']; ?></h1>
+<?php 
+    $id = $_POST['id'];
+    echo $id;
+    $house_data = try_get_house_by_id($id);
+?> 
 
 <section id="registerform">
     <form method="post">
@@ -19,7 +23,7 @@
             <input type="button" id="close_form_button" value="close" onclick="close_form()">
             <div id="form_display">
             <label><br>Title</label>
-                <input type="text" id="title" maxlength="64" placeholder="Small title for your house..." required>
+                <input type="text" id="title" maxlength="64" value="<?php echo $house_data['title']?>" required>
             <label><br>Daily Price</label>
                 <input  id="daily_price" type="number" step="0.01" id="price" maxlength="5" required>
             <label><br>City</label>
@@ -96,9 +100,5 @@
         document.getElementById("open_form_button").style.display = "block";
         document.getElementById("close_form_button").style.display = "none";
         document.getElementById("registerform").style.height = "10em";
-
-
-        
-        
     }
 </script>

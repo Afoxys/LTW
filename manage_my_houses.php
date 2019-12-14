@@ -83,7 +83,7 @@ foreach($houses as $house){
             <article>
             <header><?php echo $house['title']?></header>
             <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="100" height="100"><br>
-            <form action="view_house.php" method="post" id="view_house_id">
+            <form action="edit_house.php" method="post" id="view_house_id">
                 <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
                 <input type="submit" id="house_selection" value="Edit this listing">
             </form>

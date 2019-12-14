@@ -113,7 +113,7 @@ color: white;
     border-radius: 5px;
 }
 
-#registerform {
+#registerform, #signup-container {
     font-family: 'Open Sans', sans-serif;
     margin: 2% 0 0 25%; 
     width:40%;
@@ -125,12 +125,12 @@ color: white;
     box-shadow: 5px 5px 5px 0px #00000030;
 }
 
-#registerform h1, h2 {
+#registerform h1, h2 ,#signup-container h1, h2 {
     text-align: center;
     color:#e27d60;
 }
 
-#registerform label{
+#registerform label, #signup-container label{
     width:30%;
     list-style-type: none;
     text-align: left;
@@ -149,7 +149,7 @@ color: white;
     border-radius: 5px;
 }
 
-#registerform input{
+#registerform input, #signup-container input{
     padding: 0.5em 1em;
     margin: 0.25em 0em 0em 1em;
 }
@@ -344,7 +344,7 @@ input:checked + .slider:before {
         border-radius: 5px;
     }
 
-    #registerform {
+    #registerform, #signup-container {
         width:100%;
         padding: 1em;
         margin: 1em 0 0 0;

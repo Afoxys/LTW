@@ -1,7 +1,7 @@
 <style>
     #invisible_submit {
         position:absolute;
-        padding: 10em 10em 6em 100em;
+        padding: 10em 10em 6em 150em;
         color: transparent;
         background-color: transparent;
         border: transparent;
@@ -18,20 +18,16 @@
         <form action="view_house.php" method="post" id="">
             <div class="house_simple" href="view_house.php">
             <?php
-                if( isset($_POST['SearchCity'])){
-                    echo $city;
+                if( empty($checkout)){
                     ?>
-                    <input type="hidden" name="city" value="<?php echo $city?>">
                     <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
                     <?php
                 }
 
-                else if( isset($location)) {
+                else if(!empty($checkout)) {
                     ?>
-                    <input type="hidden" name="location" value="<?php echo $location?>">
                     <input type="hidden" name="checkin" value="<?php echo $checkin?>">
                     <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-                    <input type="hidden" name="guests" value="<?php echo $guests?>">
                     <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
                     <?php
                 }

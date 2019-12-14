@@ -219,3 +219,18 @@ let my_rent_container = document.getElementById('my-rent-container');
 if(my_rent_container != null) {
     my_rent_container.addEventListener('submit', function() { try_add_house(my_rent_container); });
 }
+
+
+
+
+let search_filter = document.getElementById('search_filter');
+if(search_filter != null) {
+    var inputs = search_filter.getElementsByTagName("input"); 
+    for (i = 0; i < inputs.length; i++) {
+       inputs[i].onchange = refresh_search;
+    }
+}
+
+function refresh_search() {
+    console.log("REFRESH");
+}
