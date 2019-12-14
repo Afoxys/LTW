@@ -9,8 +9,14 @@
 
 
 <?php
-// outras coisas:
-// Em modo "not login", botao "rent your house" da navbar manda para "create_account.php" (apos criar, redirecionar para onde?)
+// TODO:
 // Em modo "not login", se permitir "search", eventual botao "rent this house" manda para "create_account.php"
     //(apos criar, redirecionar para onde? guardar o pedido de rent feito anteriormente? como?)
+// Alugar casa
+// Rate aluguer de casa -> apos login se tiver um aluguer que já passou e que ainda não deu rating redirecionar para pagina de rating
+// CSRF - segurança
+// List reservations for their places.
+// AFONSO: Do rent action
+//         Add comment query to view_house
+//         Do my_house_rent_listing
 ?>

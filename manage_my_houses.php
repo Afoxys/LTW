@@ -37,8 +37,8 @@
     }
 
     .house_simple header {
-        grid-column-start: 2;
-        grid-column-end: 3;
+        grid-column-start: 1;
+        grid-column-end: 2;
         grid-row-start: 1;
         grid-row-end: 2;
         margin: 0%;
@@ -46,17 +46,23 @@
         font-weight: bold;
     }
 
-    .house_simple #house_selection {
+    .house_simple #view_house_id {
         grid-column-start: 12;
         grid-column-end: 12;
         grid-row-start: 2;
         grid-row-end: 3;
-        padding: 1em;
+        padding: 0;
         border-radius: 5px;
-        margin: 1em;
+        margin: 0;
         max-width: 10em;
         border-width: 1px;
     }
+
+    #house_selection {
+        padding: 1em;
+
+    }
+
 </style>
 
 <?php 
@@ -77,7 +83,10 @@ foreach($houses as $house){
             <article>
             <header><?php echo $house['title']?></header>
             <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="100" height="100"><br>
-            <button type="button" id="house_selection" onclick="window.location.href='edit_house.php?id=<?php echo $house['houseID']?>'">Edit this listing</button>
+            <form action="view_house.php" method="post" id="view_house_id">
+                <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
+                <input type="submit" id="house_selection" value="Edit this listing">
+            </form>
             </article>
         </div>
     </section>

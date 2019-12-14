@@ -1,14 +1,4 @@
 <?php
-    echo "Inside Script";
-  // Database connection
-  $dbh = new PDO('sqlite:upload.db');
-  $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-  // Insert image data into database
-  $stmt = $dbh->prepare("INSERT INTO images VALUES(NULL)");
-  $stmt->execute();
-
   // Get image ID
   $id = $dbh->lastInsertId();
 

@@ -6,7 +6,7 @@
 
 <section id="form">
     <h1>Book your stay</h1>
-    <form method="get">
+    <form name="search_form" method="post" action="search_city.php">
     <label>
         <br>Where<input type="text" placeholder="Example: Porto" name="Location">
     </label>
@@ -26,6 +26,6 @@
     <label>
         <br>Guests<input type="number" name="Guests" min="1"> <br>
     </label>
-    <input  type="submit" value="Search">
+    <input type="submit" value="Search">
     </form>
 </section>

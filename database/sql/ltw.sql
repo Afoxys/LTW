@@ -48,11 +48,11 @@ CREATE TABLE Rent (
     house INTEGER NOT NULL,
     rent_start DATETIME NOT NULL,
     rent_end DATETIME NOT NULL,
-    rating INTEGER NOT NULL,
+    rating INTEGER DEFAULT NULL,
     comments TEXT DEFAULT NULL,
     PRIMARY KEY(house, rent_start),
     FOREIGN KEY(user) REFERENCES User(email),
     FOREIGN KEY(house) REFERENCES House(houseID),
     CHECK(rent_end > rent_start),
-    CHECK(rating BETWEEN 1 AND 5)
+    CHECK(rating BETWEEN 1 AND 5 OR rating = NULL)
 );

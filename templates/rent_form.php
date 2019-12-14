@@ -135,4 +135,8 @@
         document.getElementById("FirstPage").style.display = "block";
         document.getElementById("SecondPage").style.display = "none";
     }
+
+    let today = new Date().toISOString().substr(0, 10);
+    document.getElementById("availability_start").setAttribute("min", today);
+    document.getElementById("availability_end").setAttribute("min", today);
 </script>

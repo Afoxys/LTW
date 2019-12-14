@@ -83,12 +83,17 @@ function try_get_house_rating_by_id($id) {
 
 function getAllHousesByCity($city) {
     global $db;
-    $stmt = $db->prepare('
-      SELECT * From House WHERE city = ?
-      ');
+    $stmt = $db->prepare('SELECT * From House WHERE city = ?');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
+
+// function getAllHousesBySearch($location,$checkin,$checkout,$guests) {
+//     global $db;
+//     $stmt = $db->prepare('SELECT * From House WHERE city = ?');
+//     $stmt->execute(array($city));
+//     return $stmt->fetchAll();
+// }
 
 function try_get_houses_by_owner_email($email) {
 

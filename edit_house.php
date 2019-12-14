@@ -75,8 +75,8 @@
 
 <section id="registerform">
     <h2>Upload a photo</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="image">
+    <form action="upload/upload.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="image"  accept="image/jpg, image/jpeg">
         <input type="submit" value="Upload">
     </form>
 </section>
