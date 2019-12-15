@@ -34,6 +34,11 @@
             <br>Check-Out <input id="CheckOut" type="date" name="checkout" value="<?php echo htmlspecialchars($checkout, ENT_QUOTES); ?>">
         </label>
         <label>
+            <br>Max Price <input type="number" name="max_price" min="1" step="0.01" value="<?php 
+            $price = ($max_price < 0) ? '' : $max_price;
+            echo htmlspecialchars($price, ENT_QUOTES); ?>">
+        </label>
+        <label>
             <br>Guests <input type="number" name="guests" min="1" value="<?php echo htmlspecialchars($guests, ENT_QUOTES); ?>">
         </label>
         <label>

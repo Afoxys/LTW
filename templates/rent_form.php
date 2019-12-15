@@ -48,7 +48,7 @@
             <label><br>Title</label>
                 <input type="text" id="title" maxlength="64" placeholder="Small title for your house..." required>
             <label><br>Daily Price</label>
-                <input  id="daily_price" type="number" step="0.01" id="price" maxlength="5" required>
+                <input  id="daily_price" type="number" step="0.01" id="price" maxlength="6" required>
             <label><br>City</label>
                 <input type="text" id="city" required>
             <label><br>State / Region</label>

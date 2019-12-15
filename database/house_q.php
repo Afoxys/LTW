@@ -88,68 +88,80 @@ function get_all_houses_by_city($city) {
     return $stmt->fetchAll();
 }
 
-function get_all_houses_by_check_in_out($location, $checkin, $checkout, $guests) {
+function get_all_houses_by_check_in_out($location, $checkin, $checkout, $guests, $max_price) {
     $in = strtotime($checkin);
     $out = strtotime($checkout);
     $loc = "%".$location."%";
+    $price = ($max_price < 0) ? 999999 : $max_price;
     global $db;    
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE houseID NOT IN 
                         ( SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start) )
                         AND availability_start <= :checkin AND availability_end >= :checkout
                         AND n_beds >= :guests
-                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
+                        AND daily_price <= :price"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
     $stmt->bindParam(':checkout', $out);
     $stmt->bindParam(':guests', $guests);
+    $stmt->bindParam(':price', $price);
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function get_all_houses_by_check_in($location, $checkin, $guests) {
+function get_all_houses_by_check_in($location, $checkin, $guests, $max_price) {
     $in = strtotime($checkin);
     $loc = "%".$location."%";
+    $price = ($max_price < 0) ? 999999 : $max_price;
     global $db;    
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE strftime('%s','now') <= :checkin AND availability_end >= :checkin
                         AND n_beds >= :guests
-                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
+                        AND daily_price <= :price"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
     $stmt->bindParam(':guests', $guests);
+    $stmt->bindParam(':price', $price);
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function get_all_houses_by_check_out($location, $checkout, $guests) {
+function get_all_houses_by_check_out($location, $checkout, $guests, $max_price) {
     $out = strtotime($checkout);
     $loc = "%".$location."%";
+    $price = ($max_price < 0) ? 999999 : $max_price;
     global $db;    
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE availability_end >= :checkout AND :checkout >= strftime('%s','now')
                         AND n_beds >= :guests
-                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
+                        AND daily_price <= :price"
     );
     $stmt->bindParam(':loc', $loc);
-    $stmt->bindParam(':checkin', $in);
+    $stmt->bindParam(':checkout', $out);
     $stmt->bindParam(':guests', $guests);
+    $stmt->bindParam(':price', $price);
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function get_all_houses_no_check($location, $guests) {
+function get_all_houses_no_check($location, $guests, $max_price) {
     $loc = "%".$location."%";
+    $price = ($max_price < 0) ? 999999 : $max_price;
     global $db;    
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE n_beds >= :guests
                         AND availability_end > strftime('%s','now')
-                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
+                        AND daily_price <= :price"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':guests', $guests);
+    $stmt->bindParam(':price', $price);
     $stmt->execute();
     return $stmt->fetchAll();
 }
@@ -180,8 +192,27 @@ function get_last_house_id() {
         return 0;
 }
 
+function check_rent_validity($id, $checkin, $checkout) {
+    $in = strtotime($checkin);
+    $out = strtotime($checkout);
+    global $db;
+    $stmt = $db->prepare("SELECT * FROM House
+                        WHERE houseID NOT IN 
+                        ( SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start) )
+                        AND availability_start <= :checkin AND availability_end >= :checkout AND houseID = :id"
+    );
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':checkin', $in);
+    $stmt->bindParam(':checkout', $out);
+    $stmt->execute();
+    $rent = $stmt->fetch();
+    return ($rent !== false);
+}
+
 function try_rent_house($email, $id, $checkin, $checkout) {
     global $db;
+    $checkin = strtotime($checkin);
+    $checkout = strtotime($checkout);
 
     $stmt = $db->prepare('INSERT INTO Rent VALUES (?, ?, ?, ?, NULL, NULL)');
     $stmt->execute(array(
@@ -251,5 +282,15 @@ function try_get_image_count_by_id($id) {
         return $count['img_count'];
     else
         return NULL;
+}
+
+function update_image_count_by_id($id, $count) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('UPDATE House SET img_count = ? WHERE houseID= ?');
+    $stmt->execute(array($count, $id));
 }
 ?>

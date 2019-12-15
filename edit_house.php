@@ -27,20 +27,6 @@
                 <input type="text" id="title" maxlength="64" placeholder="<?php echo $house_data['title']?>" required>
             <label><br>Daily Price</label>
                 <input  id="daily_price" type="number" step="0.01" id="price" maxlength="5" required>
-            <label><br>City</label>
-                <input type="text" id="city" required>
-            <label><br>State / Region</label>
-                <input type="text" id="region" required>
-            <label><br>Country</label> 
-                <input type="text" id="country" required>
-            <label><br>Street</label>
-                <input type="text" id="street" required>
-            <label><br>Door</label>
-                <input type="text" id="door" required>
-            <label><br>Floor</label>
-                <input type="text" id="floor">
-            <label><br>Postal Code</label>
-                <input type="text" pattern = "\d{4}-\d{3}" id="postal_code" required>
             <label><br>Description</label>
                 <textarea id="description" maxlength="500" clos="50" rows="10" placeholder="Small description of your house..."></textarea>
             <label><br>Number of beds</label>

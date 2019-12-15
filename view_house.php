@@ -11,27 +11,30 @@ include_once('templates/navbar.php');
 
 include_once('database/house_q.php');
 
-$house_data = try_get_house_by_id($_GET['id']);
+$id = $_POST['id'];
+$count = try_get_image_count_by_id($id);
+$pathOriginal = "images/houses/h$id/originals/h$id.jpg";
+$pathMedium = "images/houses/h$id/medium/h$id-";
+
+$house_data = try_get_house_by_id($_POST['id']);
 if( isset($_SESSION['firstname'])){
     $email = $_SESSION['email'];
 }
 
-$house_rat = try_get_house_rating_by_id($_GET['id']);
+$house_rat = try_get_house_rating_by_id($_POST['id']);
 if($house_rat['avg_rat'] === NULL) {
     $rating = 'No rating';
 } else {
     $rating = $house_rat['avg_rat'];
 }
 
-if(empty($_GET['checkin'])){
+if(empty($_POST['checkin'])){
 }
 
-else if(!empty($_GET['checkin'])) {
-    $checkin = $_GET['checkin'];
-    $checkout = $_GET['checkout'];
+else if(!empty($_POST['checkin'])) {
+    $checkin = $_POST['checkin'];
+    $checkout = $_POST['checkout'];
 }
-
-
 
 
 ?>
@@ -49,7 +52,7 @@ else if(!empty($_GET['checkin'])) {
 
 
     <h1><?php echo $house_data['title']?></h1>
-    <img id="house_img" alt="house image" src="images/houses/h<?php echo $_GET['id']?>.jpg">
+        <a href=<?php echo $pathOriginal?>><img id="house_img" alt="house image"src=<?php echo $pathOriginal?> width="960" width="540"></a>
     <!-- MULTIPLE IMAGES -->
     <div><?php printf("%s Nº %s %s, %s %s\n", $house_data['street'], $house_data['door'], $house_data['floor'], $house_data['postal_code'], $house_data['city']); ?></div>
     <div id="house_description"><?php echo $house_data['house_description']?></div>
@@ -66,7 +69,7 @@ else if(!empty($_GET['checkin'])) {
     </div>
 
     <?php
-        if(empty($_GET['checkin']) || empty($_GET['checkout'])){
+        if(empty($_POST['checkin']) || empty($_POST['checkout'])){
            ?>
            <form action="rented_success.php" method="post" id="user_rent_action">
                 Price: <?php echo $house_data['daily_price']?>€/night
@@ -83,7 +86,7 @@ else if(!empty($_GET['checkin'])) {
              </form>
            <?php
         }
-        else if(!empty($_GET['checkin'])){
+        else if(!empty($_POST['checkin'])){
             ?>
             <form action="rented_success.php" method="post" id="user_rent_action">
                 Price: <?php echo $house_data['daily_price']?>€/night

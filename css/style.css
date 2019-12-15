@@ -126,13 +126,15 @@ color: white;
 
 #search_form label{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     margin: 0.25em;
     padding: 0em;
 }
 
 #search_form label input{
+    margin: 0em;
+    padding: 0.5em 1.25em;
     flex-grow: 2;
 }
 

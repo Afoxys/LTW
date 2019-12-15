@@ -76,14 +76,16 @@ include_once('database/house_q.php');
 $houses = try_get_houses_by_owner_email($_SESSION['email']);
 
 foreach($houses as $house){
+    $id = $house['houseID'];
+    $path = "images/houses/h$id/medium/h$id.jpg";
     ?> 
     <section>
         <div class="house_simple">
             <article>
             <header><?php echo $house['title']?></header>
-            <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="100" height="100"><br>
+            <img src="<?php echo $path?>" width="100" height="100"><br>
             <form action="edit_house.php" method="post" id="view_house_id">
-                <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
+                <input type="hidden" name="id" value="<?php echo $id?>">
                 <input type="submit" id="house_selection" value="Edit this listing">
             </form>
             </article>

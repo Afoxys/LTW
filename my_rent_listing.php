@@ -43,13 +43,14 @@
 
         $title = $house['title'];
         $id = $house['houseID'];
+        $path = "images/houses/h$id/medium/h$id.jpg";
         $count = count($rents);
         if($count > 0){
             ?>
             <h1 id="count"> This house has been rented <?php echo $count ?> times! </h1>
             <div id="house_info">
                 <header id="title"><?=$title?></header>
-                <img src="images/houses/h<?php echo $id?>.jpg" width="200" height="200">
+                <img src="<?php echo $path?>" width="200" height="200">
             <?php
             foreach($rents as $rent) {
             $tenant = $rent['user'];
