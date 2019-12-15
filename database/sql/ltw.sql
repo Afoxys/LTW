@@ -37,6 +37,7 @@ CREATE TABLE House (
     washing_machine BOOLEAN NOT NULL,
     img_count INTEGER NOT NULL,
     house_description TEXT,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
 
     FOREIGN KEY(owner) REFERENCES User(email),
     CHECK(availability_end > availability_start),

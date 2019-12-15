@@ -12,7 +12,7 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
 
     global $db;
     $options = ['cost' => 12];
-    $stmt = $db->prepare('INSERT INTO House VALUES (?, ?, ?, ?,     ?, ?, ?, ?, ?, ?, ?,     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO House VALUES (?, ?, ?, ?,     ?, ?, ?, ?, ?, ?, ?,     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
     try {
         $stmt->execute(array(
 
@@ -39,7 +39,8 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
             $low_mobility,
             $washing,
             0,
-            $description
+            $description,
+            1
         ));
         return 'OK';
     } catch (PDOException $e) {
@@ -83,7 +84,7 @@ function try_get_house_rating_by_id($id) {
 
 function get_all_houses_by_city($city) {
     global $db;
-    $stmt = $db->prepare('SELECT * From House WHERE city = ?');
+    $stmt = $db->prepare('SELECT * From House WHERE city = ? AND active = 1');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
@@ -100,7 +101,7 @@ function get_all_houses_by_check_in_out($location, $checkin, $checkout, $guests,
                         AND availability_start <= :checkin AND availability_end >= :checkout
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price"
+                        AND daily_price <= :price AND active = 1"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
@@ -120,7 +121,7 @@ function get_all_houses_by_check_in($location, $checkin, $guests, $max_price) {
                         WHERE strftime('%s','now') <= :checkin AND availability_end >= :checkin
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price"
+                        AND daily_price <= :price AND active = 1"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
@@ -139,7 +140,7 @@ function get_all_houses_by_check_out($location, $checkout, $guests, $max_price) 
                         WHERE availability_end >= :checkout AND :checkout >= strftime('%s','now')
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price"
+                        AND daily_price <= :price AND active = 1"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkout', $out);
@@ -157,7 +158,7 @@ function get_all_houses_no_check($location, $guests, $max_price) {
                         WHERE n_beds >= :guests
                         AND availability_end > strftime('%s','now')
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price"
+                        AND daily_price <= :price AND active = 1"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':guests', $guests);
@@ -172,7 +173,7 @@ function try_get_houses_by_owner_email($email) {
         return NULL;
 
     global $db;
-    $stmt = $db->prepare('SELECT * FROM House WHERE owner = ?');
+    $stmt = $db->prepare('SELECT * FROM House WHERE owner = ? AND active = 1');
     $stmt->execute(array($email));
     $houses_data = $stmt->fetchAll();
     if ($houses_data !== false)
@@ -199,7 +200,7 @@ function check_rent_validity($id, $checkin, $checkout) {
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE houseID NOT IN 
                         ( SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start) )
-                        AND availability_start <= :checkin AND availability_end >= :checkout AND houseID = :id"
+                        AND availability_start <= :checkin AND availability_end >= :checkout AND houseID = :id AND active = 1"
     );
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':checkin', $in);
@@ -292,5 +293,12 @@ function update_image_count_by_id($id, $count) {
     global $db;
     $stmt = $db->prepare('UPDATE House SET img_count = ? WHERE houseID= ?');
     $stmt->execute(array($count, $id));
+}
+
+function remove_house($id) {
+
+    global $db;
+    $stmt = $db->prepare('UPDATE House SET active = 0 WHERE houseID = ?');
+    $stmt->execute(array($id));
 }
 ?>

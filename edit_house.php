@@ -72,6 +72,14 @@
         <input type="submit" value="Upload">
     </form>
 </section>
+
+<section id="registerform">
+    <h2>Delete your house</h2>
+    <form action="actions/remove_house.php" method="post">
+        <input type="submit" value="Delete">
+        <input type="hidden" name="id"  value="<?php echo $id?>">  
+    </form>
+</section>
     
 
 <?php include_once('templates/footer.php'); ?>
