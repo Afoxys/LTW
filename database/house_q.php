@@ -167,13 +167,28 @@ function get_all_houses_no_check($location, $guests, $max_price) {
     return $stmt->fetchAll();
 }
 
-function try_get_houses_by_owner_email($email) {
+function try_get_active_houses_by_owner_email($email) {
 
     if($email === NULL)
         return NULL;
 
     global $db;
     $stmt = $db->prepare('SELECT * FROM House WHERE owner = ? AND active = 1');
+    $stmt->execute(array($email));
+    $houses_data = $stmt->fetchAll();
+    if ($houses_data !== false)
+        return $houses_data;
+    else
+        return NULL;
+}
+
+function try_get_houses_by_owner_email($email) {
+
+    if($email === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM House WHERE owner = ?');
     $stmt->execute(array($email));
     $houses_data = $stmt->fetchAll();
     if ($houses_data !== false)

@@ -73,7 +73,7 @@ if(!isset($_SESSION['email'])) {
 include_once('templates/navbar.php');
 include_once('database/house_q.php');
 
-$houses = try_get_houses_by_owner_email($_SESSION['email']);
+$houses = try_get_active_houses_by_owner_email($_SESSION['email']);
 
 if (!empty($houses)) {
     foreach($houses as $house){
