@@ -6,6 +6,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+/* Style related to the navbar */
 /* Add a black background color to the top navigation bar */
 .topnav {
     overflow: auto;
@@ -58,7 +59,9 @@ color: white;
     font-size: 1em;
     border-radius: 5px;
 }
+/* Style related to the navbar */
 
+/* Style related to the background */
 .background {
     overflow: auto;
     background-color: #cccccc;
@@ -78,7 +81,9 @@ color: white;
 #homebackground {
     background-image: url("../images/background/background.jpg");
 }
+/* Style related to the background */
 
+/* Form realted css */
 #form{
     font-family: 'Open Sans', sans-serif;
     margin: 5% 5%; 
@@ -102,7 +107,7 @@ color: white;
 }
 
 #form input{
-    padding: 0.25em 1.25em;
+    padding: 0em 1.25em;
     margin: 0 0 0 4em;
     border-radius: 5px;
 }
@@ -123,7 +128,7 @@ color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 0em;
+    margin: 0.25em;
     padding: 0em;
 }
 
@@ -163,8 +168,6 @@ color: white;
     list-style-type: none;
     text-align: left;
 }
-
-
 
 #SecondPage [type=submit] {
     position: relative;
@@ -259,7 +262,10 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+/* Form realted css */
 
+
+/* House listing realted css */
 .house_simple {
     text-decoration: none;
 }
@@ -269,11 +275,11 @@ input:checked + .slider:before {
 }
 
 .house_simple:hover article{
-    border-color: orange;
+    border-color: #e8a87c;
 }
 
 .house_simple:active {
-    color: orange;
+    color: #e8a87c;
 }
 
 .house_simple article{
@@ -324,9 +330,17 @@ input:checked + .slider:before {
     padding: 0%;
     text-align: right;
 }
+/* House listing realted css */
+
+/* House view realted css */
 
 
-/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+/* House view realted css */
+
+
+
+
+/* When the screen is less than 720px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 720px) {
     .topnav a.logo {
         float: none;

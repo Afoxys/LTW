@@ -237,4 +237,19 @@ function try_get_rents_by_house($id) {
     else
         return NULL;
 }
+
+function try_get_image_count_by_id($id) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT img_count FROM House WHERE houseID= ?');
+    $stmt->execute(array($id));
+    $count = $stmt->fetch();
+    if ($count !== false)
+        return $count['img_count'];
+    else
+        return NULL;
+}
 ?>

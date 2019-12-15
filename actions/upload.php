@@ -1,11 +1,20 @@
 <?php
   // Get image ID
   include_once('../database/house_q.php');
-  $id = get_last_house_id();
-
-  // Generate filenames for original, small and medium files
-  $originalFileName = "../images/houses/originals/$id.jpg";
-  $mediumFileName = "images/thumbs_medium/$id.jpg";
+  $id = $_POST['id'];
+  $count = try_get_image_count_by_id($id);
+  echo $count;
+  
+  
+  // Generate filenames for original and medium files
+  if($count == 0) {
+    $originalFileName = "../images/houses/originals/$id.jpg";
+    $mediumFileName = "../images/houses/thumbs_medium/$id.jpg";
+  }
+  else {
+    $originalFileName = "../images/houses/originals/$id-$count.jpg";
+    $mediumFileName = "../images/houses/thumbs_medium/$id-$count.jpg";
+  }
 
   // Move the uploaded file to its final destination
   move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
@@ -16,11 +25,6 @@
   $width = imagesx($original);     // width of the original image
   $height = imagesy($original);    // height of the original image
   $square = min($width, $height);  // size length of the maximum square
-
-  // Create and save a small square thumbnail
-  $small = imagecreatetruecolor(200, 200);
-  imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
-  imagejpeg($small, $smallFileName);
 
   // Calculate width and height of medium sized image (max width: 400)
   $mediumwidth = $width;
@@ -35,5 +39,4 @@
   imagecopyresized($medium, $original, 0, 0, 0, 0, $mediumwidth, $mediumheight, $width, $height);
   imagejpeg($medium, $mediumFileName);
 
-  header("Location: index.php");
 ?>

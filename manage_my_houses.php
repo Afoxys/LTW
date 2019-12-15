@@ -10,11 +10,11 @@
     }
 
     .house_simple:hover article{
-        border-color: orange;
+        border-color: #e27d60;
     }
 
     .house_simple:active {
-        color: orange;
+        color: #e27d60;
     }
 
     .house_simple article{

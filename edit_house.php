@@ -14,7 +14,6 @@
 <?php 
 
     $id = $_POST['id'];
-    echo $id;
     $house_data = try_get_house_by_id($id);
 ?> 
 
@@ -82,7 +81,8 @@
 <section id="registerform">
     <h2>Upload a photo</h2>
     <form action="actions/upload.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="image"  accept="image/jpg, image/jpeg">
+        <input type="hidden" name="id"  value="<?php echo $id?>">
+        <input type="file" name="image"  accept="image/jpg, image/jpeg" required>
         <input type="submit" value="Upload">
     </form>
 </section>

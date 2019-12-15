@@ -40,7 +40,7 @@
             <input type="submit" id="invisible_submit">
             <article>
                 <header><?=$house['title']?></header>
-                <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="200" height="200">
+                <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="355" height="200">
                 <p id="rating">Rating: <?=$rating['avg_rat']?></p>
                 <p id="address"><?php printf("%s Nº %s %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
                 <p id="price"><?=$house['daily_price']?> €/day</p>
