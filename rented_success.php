@@ -49,7 +49,7 @@
     }
     
     $can_rent = check_rent_validity($id, $checkin, $checkout);
-    if($can_rent === "OK") {
+    if($can_rent === true) {
         $msg = try_rent_house($email, $id, $checkin, $checkout);
         if($msg === 'OK') {
             echo nl2br("Rented House successfuly with the following arguments:\n");
