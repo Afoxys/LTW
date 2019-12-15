@@ -84,7 +84,7 @@ function try_get_house_rating_by_id($id) {
 
 function get_all_houses_by_city($city) {
     global $db;
-    $stmt = $db->prepare('SELECT * From House WHERE city = ? AND active = 1');
+    $stmt = $db->prepare("SELECT * From House WHERE city = ? AND active = 'true'");
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
@@ -101,7 +101,7 @@ function get_all_houses_by_check_in_out($location, $checkin, $checkout, $guests,
                         AND availability_start <= :checkin AND availability_end >= :checkout
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price AND active = 1"
+                        AND daily_price <= :price AND active = 'true'"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
@@ -121,7 +121,7 @@ function get_all_houses_by_check_in($location, $checkin, $guests, $max_price) {
                         WHERE strftime('%s','now') <= :checkin AND availability_end >= :checkin
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price AND active = 1"
+                        AND daily_price <= :price AND active = 'true'"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkin', $in);
@@ -140,7 +140,7 @@ function get_all_houses_by_check_out($location, $checkout, $guests, $max_price) 
                         WHERE availability_end >= :checkout AND :checkout >= strftime('%s','now')
                         AND n_beds >= :guests
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price AND active = 1"
+                        AND daily_price <= :price AND active = 'true'"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':checkout', $out);
@@ -158,28 +158,13 @@ function get_all_houses_no_check($location, $guests, $max_price) {
                         WHERE n_beds >= :guests
                         AND availability_end > strftime('%s','now')
                         AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)
-                        AND daily_price <= :price AND active = 1"
+                        AND daily_price <= :price AND active = 'true'"
     );
     $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':guests', $guests);
     $stmt->bindParam(':price', $price);
     $stmt->execute();
     return $stmt->fetchAll();
-}
-
-function try_get_active_houses_by_owner_email($email) {
-
-    if($email === NULL)
-        return NULL;
-
-    global $db;
-    $stmt = $db->prepare('SELECT * FROM House WHERE owner = ? AND active = 1');
-    $stmt->execute(array($email));
-    $houses_data = $stmt->fetchAll();
-    if ($houses_data !== false)
-        return $houses_data;
-    else
-        return NULL;
 }
 
 function try_get_houses_by_owner_email($email) {
@@ -209,13 +194,15 @@ function get_last_house_id() {
 }
 
 function check_rent_validity($id, $checkin, $checkout) {
+    if($checkin === NULL || $checkout === NULL || $id === NULL)
+        return false;
     $in = strtotime($checkin);
     $out = strtotime($checkout);
     global $db;
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE houseID NOT IN 
                         ( SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start) )
-                        AND availability_start <= :checkin AND availability_end >= :checkout AND houseID = :id AND active = 1"
+                        AND availability_start <= :checkin AND availability_end >= :checkout AND houseID = :id AND active = 'true'"
     );
     $stmt->bindParam(':id', $id);
     $stmt->bindParam(':checkin', $in);
@@ -310,10 +297,12 @@ function update_image_count_by_id($id, $count) {
     $stmt->execute(array($count, $id));
 }
 
-function remove_house($id) {
-
+function try_remove_house($id,$is_active) {
+    if($is_active !== 'true' && $is_active !== 'false')
+        return 'FAILED';
     global $db;
-    $stmt = $db->prepare('UPDATE House SET active = 0 WHERE houseID = ?');
-    $stmt->execute(array($id));
+    $stmt = $db->prepare("UPDATE House SET active = ? WHERE houseID = ?");
+    $stmt->execute(array($is_active, $id));
+    return 'OK';
 }
 ?>

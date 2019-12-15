@@ -1,13 +1,14 @@
 <?php
 	//session_set_cookie_params(0, '/', '', false, true);
-	session_start();
+	function generate_random_token() {
+		return bin2hex(openssl_random_pseudo_bytes(32));
+	}
+    session_start();
+
 
 	include_once('../database/account_q.php');
 
 
-	// function generate_random_token() {
-	// 	return bin2hex(openssl_random_pseudo_bytes(32));
-	// }
 
 	function check_params($email, $pwd) {
 		if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -33,10 +34,14 @@
 	
 		if($userData !== NULL) {
 			session_regenerate_id(true);
-
-			$success = true;
+            
+            if (!isset($_SESSION['csrf'])) {
+                $_SESSION['csrf'] = generate_random_token();
+            }
+            
 			$_SESSION['email'] = $userData['email'];
-			$_SESSION['firstname'] = $userData['firstname'];
+            $_SESSION['firstname'] = $userData['firstname'];
+            $success = true;
 		}
 		else {
 			$msg = 'Bad Login';

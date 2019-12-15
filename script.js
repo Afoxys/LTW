@@ -4,9 +4,6 @@ function encode_for_ajax(data) {
     }).join('&')
 }
 
-
-
-
 function try_login(login_form) {
     var email = login_form.email.value;
     var pwd = login_form.password.value;

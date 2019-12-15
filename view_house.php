@@ -82,6 +82,7 @@ else if(!empty($_POST['checkin'])) {
                     <br>Check-Out<input id="checkout" type="date" name="checkout" value="<?php echo $checkout?>" required>
                 </label>
                 <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
                 <input type="submit" value="Rent this house">
              </form>
            <?php
@@ -95,6 +96,7 @@ else if(!empty($_POST['checkin'])) {
                 <input type="hidden" name="checkin" value="<?php echo $checkin?>" >
                 <input type="hidden" name="checkout" value="<?php echo $checkout?>">
                 <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
                 <input type="submit" value="Rent this house">
             </form>
             <?php

@@ -14,6 +14,7 @@
 <?php 
 
     $id = $_POST['id'];
+    $active = $_POST['active'];
     $house_data = try_get_house_by_id($id);
 ?> 
 
@@ -73,14 +74,32 @@
     </form>
 </section>
 
-<section id="registerform">
-    <h2>Delete your house</h2>
+<?php if($active == 'true') { 
+    ?>
+    <section id="registerform">
+    <h2>Stop renting your house</h2>
     <form action="actions/remove_house.php" method="post">
-        <input type="submit" value="Delete">
-        <input type="hidden" name="id"  value="<?php echo $id?>">  
+    <input type="hidden" name="active" value="false">
+    <input type="hidden" name="id"  value="<?php echo $id?>">
+    <input type="submit" value="Stop">
     </form>
-</section>
-    
+    </section> <?php
+}
+?>
+
+<?php if($active == 'false') { 
+?>
+    <section id="registerform">
+    <h2>Start renting your house</h2>
+    <form action="actions/remove_house.php" method="post">
+    <input type="hidden" name="active" value="true">
+    <input type="hidden" name="id"  value="<?php echo $id?>">  
+    <input type="submit" value="Start">
+    </form>
+    </section> <?php
+}
+?>
+
 
 <?php include_once('templates/footer.php'); ?>
 

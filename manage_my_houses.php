@@ -36,7 +36,7 @@
         grid-row-end: 4;
     }
 
-    .house_simple header {
+    .house_simple h1 {
         grid-column-start: 1;
         grid-column-end: 2;
         grid-row-start: 1;
@@ -44,6 +44,23 @@
         margin: 0%;
         padding-left: 2%;
         font-weight: bold;
+        color: black;
+    }
+
+    #active {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 3;
+        grid-row-end: 4;
+        color: black;
+    }
+
+    #true {
+        color: green;
+    }
+
+    #false {
+        color: red;
     }
 
     .house_simple #view_house_id {
@@ -73,20 +90,28 @@ if(!isset($_SESSION['email'])) {
 include_once('templates/navbar.php');
 include_once('database/house_q.php');
 
-$houses = try_get_active_houses_by_owner_email($_SESSION['email']);
+$houses = try_get_houses_by_owner_email($_SESSION['email']);
 
 if (!empty($houses)) {
     foreach($houses as $house){
         $id = $house['houseID'];
+        $active = $house['active'];
         $path = "images/houses/h$id/medium/h$id.jpg";
         ?> 
         <section>
             <div class="house_simple">
                 <article>
-                <header><?php echo $house['title']?></header>
+                <div><?php echo $house['title']?></div>
                 <img src="<?php echo $path?>" width="100" height="100"><br>
+                <?php if($active == 'true') { ?>
+                        <div id="active">This house is <div id="true">active</div></div>
+                        <?php }
+                    else { ?>
+                        <div id="active">This house is <div id="false">inactive</div></div>
+                    <?php } ?>
                 <form action="edit_house.php" method="post" id="view_house_id">
                     <input type="hidden" name="id" value="<?php echo $id?>">
+                    <input type="hidden" name="active" value="<?php echo $active?>">
                     <input type="submit" id="house_selection" value="Edit this listing">
                 </form>
                 </article>
@@ -94,10 +119,11 @@ if (!empty($houses)) {
         </section>
     <?php
     }
-} else {
+}
+else {
     ?>
     <div class="house_simple">
-        <header class="house_simple">You have no active houses</header>
+        <h1 class="house_simple">You have no active houses</h1>
     </div>
 <?php
 }
