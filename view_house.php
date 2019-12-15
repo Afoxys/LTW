@@ -11,24 +11,24 @@ include_once('templates/navbar.php');
 
 include_once('database/house_q.php');
 
-$house_data = try_get_house_by_id($_POST['id']);
+$house_data = try_get_house_by_id($_GET['id']);
 if( isset($_SESSION['firstname'])){
     $email = $_SESSION['email'];
 }
 
-$house_rat = try_get_house_rating_by_id($_POST['id']);
+$house_rat = try_get_house_rating_by_id($_GET['id']);
 if($house_rat['avg_rat'] === NULL) {
     $rating = 'No rating';
 } else {
     $rating = $house_rat['avg_rat'];
 }
 
-if(empty($_POST['checkin'])){
+if(empty($_GET['checkin'])){
 }
 
-else if(!empty($_POST['checkin'])) {
-    $checkin = $_POST['checkin'];
-    $checkout = $_POST['checkout'];
+else if(!empty($_GET['checkin'])) {
+    $checkin = $_GET['checkin'];
+    $checkout = $_GET['checkout'];
 }
 
 
@@ -49,7 +49,7 @@ else if(!empty($_POST['checkin'])) {
 
 
     <h1><?php echo $house_data['title']?></h1>
-    <img id="house_img" alt="house image" src="images/houses/h<?php echo $_POST['id']?>.jpg">
+    <img id="house_img" alt="house image" src="images/houses/h<?php echo $_GET['id']?>.jpg">
     <!-- MULTIPLE IMAGES -->
     <div><?php printf("%s Nº %s %s, %s %s\n", $house_data['street'], $house_data['door'], $house_data['floor'], $house_data['postal_code'], $house_data['city']); ?></div>
     <div id="house_description"><?php echo $house_data['house_description']?></div>
@@ -66,30 +66,30 @@ else if(!empty($_POST['checkin'])) {
     </div>
 
     <?php
-        if(empty($_POST['checkin'])){
+        if(empty($_GET['checkin']) || empty($_GET['checkout'])){
            ?>
            <form action="rented_success.php" method="post" id="user_rent_action">
                 Price: <?php echo $house_data['daily_price']?>€/night
                 <br>
                 <input type="hidden" name="email" value="<?php echo $email?>">
                 <label>
-                    <br>Check-In <input id="checkin" type="date" name="checkin" required>
+                    <br>Check-In <input id="checkin" type="date" name="checkin" value="<?php echo $checkin?>" required>
                 </label>
                 <label>
-                    <br>Check-Out<input id="checkout" type="date" name="checkout" required>
+                    <br>Check-Out<input id="checkout" type="date" name="checkout" value="<?php echo $checkout?>" required>
                 </label>
                 <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
                 <input type="submit" value="Rent this house">
              </form>
            <?php
         }
-        else if(!empty($_POST['checkin'])){
+        else if(!empty($_GET['checkin'])){
             ?>
             <form action="rented_success.php" method="post" id="user_rent_action">
                 Price: <?php echo $house_data['daily_price']?>€/night
                 <br>
                 <input type="hidden" name="email" value="<?php echo $email?>">
-                <input type="hidden" name="checkin" value="<?php echo $checkin?>">
+                <input type="hidden" name="checkin" value="<?php echo $checkin?>" >
                 <input type="hidden" name="checkout" value="<?php echo $checkout?>">
                 <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
                 <input type="submit" value="Rent this house">

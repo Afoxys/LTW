@@ -6,10 +6,10 @@
 
 <section id="form">
     <h1>Book your stay</h1>
-    <form id="search_form" method="POST" action="search_results.php">
+    <form id="search_form" method="GET" action="search_results.php">
         <label>
             <p>Where</p>
-            <input type="text" placeholder="Example: Porto" name="Location">
+            <input type="text" placeholder="Example: Porto" name="location">
         </label>
         <label>
             <p>Check-In</p>
@@ -21,7 +21,7 @@
         </label>
         <label>
             <p>Guests</p>
-            <input type="number" name="Guests" min="1">
+            <input type="number" name="guests" min="1" value="1">
         </label>
         <label>
             <input type="submit" value="Search">

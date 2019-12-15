@@ -8,8 +8,8 @@
 
 	<a class="active" href="rent_house.php">Rent your house</a>
 	
-    <form action="search_results.php" method="Post">
-	    <input type="text" placeholder="Search a city..." name="SearchCity">
+    <form action="search_results.php" method="GET">
+	    <input type="text" placeholder="Search a city..." name="search_city">
     </form>
 
 </div>

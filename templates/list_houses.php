@@ -15,10 +15,14 @@
 			if ($rating['avg_rat'] === NULL) $rating['avg_rat'] = "no rating";
 		?>
 
-        <form action="view_house.php" method="post" id="">
+        <form action="view_house.php" method="GET"wsl>
             <div class="house_simple" href="view_house.php">
+            <input type="hidden" name="checkin" value="<?php echo $checkin?>">
+            <input type="hidden" name="checkout" value="<?php echo $checkout?>">
+            <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
+
             <?php
-                if( empty($checkout)){
+                /*if( empty($checkout)){
                     ?>
                     <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
                     <?php
@@ -30,13 +34,15 @@
                     <input type="hidden" name="checkout" value="<?php echo $checkout?>">
                     <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
                     <?php
-                }
+                }*/
             ?>
+            
             <input type="submit" id="invisible_submit">
             <article>
                 <header><?=$house['title']?></header>
                 <img src="images/houses/h<?php echo $house['houseID']?>.jpg" width="200" height="200">
                 <p id="rating">Rating: <?=$rating['avg_rat']?></p>
+                <p id="address"><?php printf("%s Nº %s %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
                 <p id="price"><?=$house['daily_price']?> €/day</p>
 
             </article>

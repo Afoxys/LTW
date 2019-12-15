@@ -81,79 +81,74 @@ function try_get_house_rating_by_id($id) {
         return NULL;
 }
 
-function getAllHousesByCity($city) {
+function get_all_houses_by_city($city) {
     global $db;
     $stmt = $db->prepare('SELECT * From House WHERE city = ?');
     $stmt->execute(array($city));
     return $stmt->fetchAll();
 }
 
-// function getAllHousesBySearch($location,$checkin,$checkout,$guests) {
-//     global $db;    
-//     $stmt = $db->prepare("SELECT houseID FROM House
-//                         WHERE houseID NOT IN 
-//                         (SELECT house FROM Rent WHERE (? < ?) AND (? <= rent_end AND ? >= rent_start))
-//                         AND availability_start <= ? AND availability_end > ?
-//                         AND n_beds >= ? AND city LIKE '%?%' AND region LIKE '%?%' AND country LIKE '%?%'"
-//     );
-//     $stmt->execute(array(
-//         $checkin,
-//         $checkout,
-//         $checkin,
-//         $checkout,
-//         $checkin,
-//         $checkout,
-//         $guests,
-//         $location,
-//         $location,
-//         $location
-//     ));
-//     return $stmt->fetchAll();
-// }
-
-// function getAllHousesBySearch($location, $checkin, $checkout, $guests) {
-//     global $db;    
-//     $stmt = $db->prepare("SELECT houseID FROM House
-//                         WHERE houseID NOT IN 
-//                         (SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start))
-//                         AND availability_start <= :checkin AND availability_end > :checkout
-//                         AND n_beds >= :guests AND city LIKE '%:location%' AND region LIKE '%:location%' AND country LIKE '%:location%'"
-//     );
-//     $stmt->bindParam(':location', $location);
-//     $stmt->bindParam(':checkin', $checkin);
-//     $stmt->bindParam(':checkout', $checkout);
-//     $stmt->bindParam(':guests', $guests);
-//     $stmt->execute();
-//     return $stmt->fetchAll();
-// }
-
-function getAllHousesByTimedSearch($location, $checkin, $checkout, $guests) {
-    echo $location;
-    echo $checkin;
-    echo $checkout;
-    echo $guests;
+function get_all_houses_by_check_in_out($location, $checkin, $checkout, $guests) {
+    $in = strtotime($checkin);
+    $out = strtotime($checkout);
+    $loc = "%".$location."%";
     global $db;    
-    $stmt = $db->prepare("SELECT houseID FROM House
+    $stmt = $db->prepare("SELECT * FROM House
                         WHERE houseID NOT IN 
-                        (SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start))
-                        AND availability_start <= :checkin AND availability_end > :checkout
-                        AND n_beds >= :guests"
+                        ( SELECT house FROM Rent WHERE (:checkin < :checkout) AND (:checkin <= rent_end AND :checkout >= rent_start) )
+                        AND availability_start <= :checkin AND availability_end >= :checkout
+                        AND n_beds >= :guests
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
     );
-    $stmt->bindParam(':checkin', $checkin);
-    $stmt->bindParam(':checkout', $checkout);
+    $stmt->bindParam(':loc', $loc);
+    $stmt->bindParam(':checkin', $in);
+    $stmt->bindParam(':checkout', $out);
     $stmt->bindParam(':guests', $guests);
     $stmt->execute();
     return $stmt->fetchAll();
 }
 
-function getAllHousesBySearch($location, $guests) {
-    echo $location;
-    echo $guests;
+function get_all_houses_by_check_in($location, $checkin, $guests) {
+    $in = strtotime($checkin);
+    $loc = "%".$location."%";
+    global $db;    
+    $stmt = $db->prepare("SELECT * FROM House
+                        WHERE strftime('%s','now') <= :checkin AND availability_end >= :checkin
+                        AND n_beds >= :guests
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+    );
+    $stmt->bindParam(':loc', $loc);
+    $stmt->bindParam(':checkin', $in);
+    $stmt->bindParam(':guests', $guests);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function get_all_houses_by_check_out($location, $checkout, $guests) {
+    $out = strtotime($checkout);
+    $loc = "%".$location."%";
+    global $db;    
+    $stmt = $db->prepare("SELECT * FROM House
+                        WHERE availability_end >= :checkout AND :checkout >= strftime('%s','now')
+                        AND n_beds >= :guests
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
+    );
+    $stmt->bindParam(':loc', $loc);
+    $stmt->bindParam(':checkin', $in);
+    $stmt->bindParam(':guests', $guests);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function get_all_houses_no_check($location, $guests) {
+    $loc = "%".$location."%";
     global $db;    
     $stmt = $db->prepare("SELECT * FROM House
                         WHERE n_beds >= :guests
-                        AND availability_end > strftime('%s','now')"
+                        AND availability_end > strftime('%s','now')
+                        AND (city LIKE :loc OR region LIKE :loc OR country LIKE :loc)"
     );
+    $stmt->bindParam(':loc', $loc);
     $stmt->bindParam(':guests', $guests);
     $stmt->execute();
     return $stmt->fetchAll();
