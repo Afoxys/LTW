@@ -204,11 +204,41 @@ function try_get_rents_by_owner_email($email) {
         return NULL;
 
     global $db;
-    $stmt = $db->prepare('SELECT house,rent_start,rent_end FROM House INNER JOIN Rent ON houseID=house WHERE owner= ?');
+    $stmt = $db->prepare('SELECT house,rent_start,rent_end,user FROM House INNER JOIN Rent ON houseID=house WHERE owner= ?');
     $stmt->execute(array($email));
     $houses_rent_data = $stmt->fetchAll();
     if ($houses_rent_data !== false)
         return $houses_rent_data;
+    else
+        return NULL;
+}
+
+function try_get_rent_count($id) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT COUNT(house) AS rent_count FROM Rent WHERE house= ?');
+    $stmt->execute(array($id));
+    $count = $stmt->fetch();
+    if ($count !== false)
+        return $count['rent_count'];
+    else
+        return NULL;
+}
+
+function try_get_rents_by_house($id) {
+
+    if($id === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Rent WHERE house= ?');
+    $stmt->execute(array($id));
+    $rent_listings = $stmt->fetchAll();
+    if ($rent_listings !== false)
+        return $rent_listings;
     else
         return NULL;
 }

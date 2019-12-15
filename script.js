@@ -204,7 +204,19 @@ function add_house_success(request) {
 
         if(requestData.success) {
             // console.log(requestData.id);
-            location.href = 'view_house.php?id=' + requestData.id;
+            my_form=document.createElement('FORM');
+            my_form.name='redirect_create_house';
+            my_form.method='POST';
+            my_form.action='view_house.php';
+
+            my_tb=document.createElement('INPUT');
+            my_tb.type='HIDDEN';
+            my_tb.name='id';
+            my_tb.value= requestData.id;
+            my_form.appendChild(my_tb);
+            document.body.appendChild(my_form);
+
+            my_form.submit();
         }
         else {
             console.log(requestData.msg);

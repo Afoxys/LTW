@@ -13,9 +13,11 @@
     echo "Rented with house wtih id: ",$id;
     echo nl2br("\n");
     $checkin = isset($_POST['checkin']) ? ($_POST['checkin']) : '';
+    $checkin = strtotime($checkin);
     echo "With the following check-in date: ",$checkin;
     echo nl2br("\n");
-	$checkout = isset($_POST['checkout']) ? ($_POST['checkout']) : '';
+    $checkout = isset($_POST['checkout']) ? ($_POST['checkout']) : '';
+    $checkout = strtotime($checkout);
     echo "With the following check-out date: ",$checkout;
     echo nl2br("\n");
     $msg = try_rent_house($email, $id, $checkin, $checkout);
@@ -25,6 +27,5 @@
     else {
         $success = false;
     }
-    echo $success;
 ?>
 </div>

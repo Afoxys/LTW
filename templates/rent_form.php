@@ -115,7 +115,6 @@
         </div>
         <!-- Third form page -->
     </form>
-    </form>
 </section>
 
 <script>
