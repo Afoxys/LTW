@@ -140,7 +140,6 @@ color: white;
 
 #search_form label:nth-child(5){
     justify-content: center;
-    margin: 0em;
     padding: 0em;
 }
 
@@ -148,12 +147,39 @@ color: white;
     margin: 0.75em 0em 0em 0em;
 }
 
+#account_settings_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#account_settings_form label{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.25em;
+    padding: 0em;
+}
+
+#account_settings_form label input{
+    margin: 0em;
+    padding: 0.5em 1.25em;
+    flex-grow: 2;
+}
+
+#account_settings_form label:nth-child(7){
+    justify-content: center;
+    padding: 0em;
+}
+
+#account_settings_form label:nth-child(7) button {
+    margin: 0.75em 0em 0em 0em;
+}
+
 #registerform, #signup-container {
     font-family: 'Open Sans', sans-serif;
-    margin: 2% 0 0 25%; 
-    width:40%;
-    height:38em;
-    padding:2em;
+    margin: 2% 25% 0 25%;
+    padding:1.5em;
     background:#fafafa;
     border-radius: 10px;
     border: none;
@@ -171,9 +197,38 @@ color: white;
     text-align: left;
 }
 
+#registerform #button{
+    margin: 1em 0em 0em 0em;
+}
+
 #SecondPage [type=submit] {
     position: relative;
     top: 3em;
+}
+
+#ThirdPage {
+    display: none;
+    flex-direction: column;
+}
+
+#ThirdPage label{
+    margin: 1em 0;
+}
+
+#ThirdPage span{
+    left: 10em;
+}
+
+#sub_button {
+    display: inline-block;
+}
+
+#last_buttons {
+    display: inline-block;
+}
+
+#register_button {
+    float: right;
 }
 
 #registerform textarea{
