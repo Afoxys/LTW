@@ -44,7 +44,7 @@
                     <header><?=$house['title']?></header>
                     <img src=<?php echo $path?> width="355" height="200">
                     <p id="rating">Rating: <?=$rating['avg_rat']?></p>
-                    <p id="address"><?php printf("%s Nº %s %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
+                    <p id="address"><?php printf("%s Nº %s Floor: %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
                     <p id="price"><?=$house['daily_price']?> €/day</p>
 
                 </article>

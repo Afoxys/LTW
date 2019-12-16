@@ -28,3 +28,14 @@
     </div>
 </div>
 <?php include_once('templates/footer.php'); ?>
+
+<style>
+    #signup-container {
+        height: 25em;
+    }
+
+    #register-btn {
+        padding: 0.5em;
+        border-radius: 5px;
+    }
+</style>

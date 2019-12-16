@@ -54,7 +54,7 @@ else if(!empty($_POST['checkin'])) {
     <h1><?php echo $house_data['title']?></h1>
         <a href=<?php echo $pathOriginal?>><img id="house_img" alt="house image"src=<?php echo $pathOriginal?> width="960" width="540"></a>
     <!-- MULTIPLE IMAGES -->
-    <div><?php printf("%s Nº %s %s, %s %s\n", $house_data['street'], $house_data['door'], $house_data['floor'], $house_data['postal_code'], $house_data['city']); ?></div>
+    <div><?php printf("%s Nº %s Floor: %s, %s %s\n", $house_data['street'], $house_data['door'], $house_data['floor'], $house_data['postal_code'], $house_data['city']); ?></div>
     <div id="house_description"><?php echo $house_data['house_description']?></div>
     <div id="house_rating"><?php echo $rating.' '?><i class="fa fa-star"></i></div>
     <div id="Amenities">

@@ -232,7 +232,7 @@ function try_rent_house($email, $id, $checkin, $checkout) {
     $checkin = strtotime($checkin);
     $checkout = strtotime($checkout);
 
-    $stmt = $db->prepare('INSERT INTO Rent VALUES (?, ?, ?, ?, NULL, NULL)');
+    $stmt = $db->prepare('INSERT INTO Rent (user,house,rent_start,rent_end) u  VALUES (?, ?, ?, ?)');
     $stmt->execute(array(
         $email,
         $id,
@@ -318,6 +318,15 @@ function try_remove_house($id,$is_active) {
     global $db;
     $stmt = $db->prepare("UPDATE House SET active = ? WHERE houseID = ?");
     $stmt->execute(array($is_active, $id));
+    return 'OK';
+}
+
+function try_add_rating($id, $rent_start, $rating, $comment) {
+    if(!is_numeric($rating) || ($rating > 5) || ($rating < 1) || $comment === NULL)
+        return 'FAILED';
+    global $db;
+    $stmt = $db->prepare("UPDATE Rent SET rating = ? , comments = ? WHERE house = ? AND rent_start = ? AND rating is NULL");
+    $stmt->execute(array($rating, $comment, $id, $rent_start));
     return 'OK';
 }
 ?>
