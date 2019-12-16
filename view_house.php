@@ -72,8 +72,8 @@ else if(!empty($_POST['checkin'])) {
         if(empty($_POST['checkin']) || empty($_POST['checkout'])){
            ?>
            <form action="rented_success.php" method="post" id="user_rent_action">
-                Price: <?php echo $house_data['daily_price']?>€/night
-                <br>
+                <p>Price: <?php echo $house_data['daily_price']?>€/night</p>
+                <p>Owner contact: <?php echo $house_data['owner']?></p>
                 <input type="hidden" name="email" value="<?php echo $email?>">
                 <label>
                     <br>Check-In <input id="checkin" type="date" name="checkin" value="<?php echo $checkin?>" required>

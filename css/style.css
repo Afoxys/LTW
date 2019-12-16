@@ -286,7 +286,7 @@ input:checked + .slider:before {
 
 .house_simple article{
     border-style: solid;
-    border-width: normal;
+    border-width: medium;
     border-color: black;
     border-radius: 10px;
     margin: 1%;
@@ -323,6 +323,17 @@ input:checked + .slider:before {
     text-align: right;
 }
 
+.house_simple #address {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    margin: 1% 0%;
+    padding: 0%;
+    padding-left: 2%;
+    text-align: left;
+}
+
 .house_simple #price {
     grid-column-start: 3;
     grid-column-end: 4;
@@ -331,6 +342,96 @@ input:checked + .slider:before {
     margin: 0%;
     padding: 0%;
     text-align: right;
+}
+
+.house_simple #owner {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin: 0%;
+    padding: 0%;
+    padding-left: 2%;
+    text-align: left;
+}
+
+.house_simple_no_hover {
+    text-decoration: none;
+}
+
+.house_simple_no_hover:visited {
+    color: black;
+}
+
+.house_simple_no_hover article{
+    border-style: solid;
+    border-width: medium;
+    border-color: black;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 1%;
+    display: grid;
+    grid-template-columns: 400px auto auto;
+    grid-template-rows: 10% 80% 10%;
+}
+
+.house_simple_no_hover img {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 4;
+}
+
+.house_simple_no_hover header {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 0%;
+    padding-left: 2%;
+    font-weight: bold;
+}
+
+.house_simple_no_hover #rating {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    margin: 0%;
+    padding: 0%;
+    text-align: right;
+}
+
+.house_simple_no_hover #address {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    margin: 1% 0%;
+    padding: 0%;
+    padding-left: 2%;
+    text-align: left;
+}
+
+.house_simple_no_hover #price {
+    grid-column-start: 3;
+    grid-column-end: 4;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin: 0%;
+    padding: 0%;
+    text-align: right;
+}
+
+.house_simple_no_hover #owner {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    margin: 0%;
+    padding: 0%;
+    padding-left: 2%;
+    text-align: left;
 }
 /* House listing realted css */
 

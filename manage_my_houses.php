@@ -1,8 +1,9 @@
 <style>
     .house_simple {
         text-decoration: none;
-        font-size: 1.5em;
         font-family: 'Roboto', sans-serif;
+        grid-template-columns: 10% 10% 80%;
+        grid-template-rows: 10% 80% 10%;
     }
 
     .house_simple:visited {
@@ -18,22 +19,11 @@
     }
 
     .house_simple article{
-        border-style: solid;
         border-width: 2px;
-        border-color: black;
-        border-radius: 5px;
-        margin: 1%;
-        padding: 1%;
-        display: grid;
-        grid-template-columns: 100px auto auto;
-        grid-template-rows: 10% 80% 10%;
     }
 
-    .house_simple img {
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-end: 4;
+    .house_simple header {
+        font-size: 1.5em;
     }
 
     .house_simple h1 {
@@ -50,9 +40,15 @@
     #active {
         grid-column-start: 2;
         grid-column-end: 3;
-        grid-row-start: 3;
-        grid-row-end: 4;
+        grid-row-start: 2;
+        grid-row-end: 3;
         color: black;
+        padding-left: 2%;
+        margin-top: 2em;
+    }
+
+    #active p{        
+        margin: 0;
     }
 
     #true {
@@ -65,7 +61,7 @@
 
     .house_simple #view_house_id {
         grid-column-start: 12;
-        grid-column-end: 12;
+        grid-column-end: 13;
         grid-row-start: 2;
         grid-row-end: 3;
         padding: 0;
@@ -73,6 +69,7 @@
         margin: 0;
         max-width: 10em;
         border-width: 1px;
+        text-align: right;
     }
 
     #house_selection {
@@ -101,19 +98,26 @@ if (!empty($houses)) {
         <section>
             <div class="house_simple">
                 <article>
-                <div><?php echo $house['title']?></div>
-                <img src="<?php echo $path?>" width="100" height="100"><br>
-                <?php if($active == 'true') { ?>
-                        <div id="active">This house is <div id="true">active</div></div>
+                    <header><?php echo $house['title']?></header>
+                    <img src="<?php echo $path?>" width="100" height="100"><br>
+                    <div id="active">
+                        <p>This house is </p>
+                        <?php if($active == 'true') { ?>
+                            <div id="true">
+                                <p>active</p>
+                            </div>
                         <?php }
-                    else { ?>
-                        <div id="active">This house is <div id="false">inactive</div></div>
-                    <?php } ?>
-                <form action="edit_house.php" method="post" id="view_house_id">
-                    <input type="hidden" name="id" value="<?php echo $id?>">
-                    <input type="hidden" name="active" value="<?php echo $active?>">
-                    <input type="submit" id="house_selection" value="Edit this listing">
-                </form>
+                        else { ?>
+                            <div id="false">
+                                <p>inactive</p>
+                            </div>
+                        <?php } ?>
+                    </div>
+                    <form action="edit_house.php" method="post" id="view_house_id">
+                        <input type="hidden" name="id" value="<?php echo $id?>">
+                        <input type="hidden" name="active" value="<?php echo $active?>">
+                        <input type="submit" id="house_selection" value="Edit this listing">
+                    </form>
                 </article>
             </div>
         </section>

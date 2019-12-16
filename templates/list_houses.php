@@ -19,35 +19,35 @@
 
         <form action="view_house.php" method="POST"wsl>
             <div class="house_simple" href="view_house.php">
-            <input type="hidden" name="checkin" value="<?php echo $checkin?>">
-            <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-            <input type="hidden" name="id" value="<?php echo $id?>">
+                <input type="hidden" name="checkin" value="<?php echo $checkin?>">
+                <input type="hidden" name="checkout" value="<?php echo $checkout?>">
+                <input type="hidden" name="id" value="<?php echo $id?>">
 
-            <?php
-                /*if( empty($checkout)){
-                    ?>
-                    <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
-                    <?php
-                }
+                <?php
+                    /*if( empty($checkout)){
+                        ?>
+                        <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
+                        <?php
+                    }
 
-                else if(!empty($checkout)) {
-                    ?>
-                    <input type="hidden" name="checkin" value="<?php echo $checkin?>">
-                    <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-                    <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
-                    <?php
-                }*/
-            ?>
-            
-            <input type="submit" id="invisible_submit">
-            <article>
-                <header><?=$house['title']?></header>
-                <img src=<?php echo $path?> width="355" height="200">
-                <p id="rating">Rating: <?=$rating['avg_rat']?></p>
-                <p id="address"><?php printf("%s Nº %s %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
-                <p id="price"><?=$house['daily_price']?> €/day</p>
+                    else if(!empty($checkout)) {
+                        ?>
+                        <input type="hidden" name="checkin" value="<?php echo $checkin?>">
+                        <input type="hidden" name="checkout" value="<?php echo $checkout?>">
+                        <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
+                        <?php
+                    }*/
+                ?>
+                
+                <input type="submit" id="invisible_submit">
+                <article>
+                    <header><?=$house['title']?></header>
+                    <img src=<?php echo $path?> width="355" height="200">
+                    <p id="rating">Rating: <?=$rating['avg_rat']?></p>
+                    <p id="address"><?php printf("%s Nº %s %s, %s %s\n", $house['street'], $house['door'], $house['floor'], $house['postal_code'], $house['city']); ?></p>
+                    <p id="price"><?=$house['daily_price']?> €/day</p>
 
-            </article>
+                </article>
             </div>
         </form>
 	<?php } ?>

@@ -182,6 +182,21 @@ function try_get_houses_by_owner_email($email) {
         return NULL;
 }
 
+function try_get_rents_by_user_email($email) {
+
+    if($email === NULL)
+        return NULL;
+
+    global $db;
+    $stmt = $db->prepare('SELECT * FROM Rent WHERE user = ?');
+    $stmt->execute(array($email));
+    $rents_data = $stmt->fetchAll();
+    if ($rents_data !== false)
+        return $rents_data;
+    else
+        return NULL;
+}
+
 function get_last_house_id() {
     global $db;
     $stmt = $db->prepare('SELECT seq FROM sqlite_sequence WHERE name="House"');
