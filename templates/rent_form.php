@@ -1,5 +1,5 @@
 <style>
-    #SecondPage, #ThirdPage{
+    #SecondPage{
         Display: none;
     }
     textarea {
@@ -12,31 +12,6 @@
     }
     input[type=number] {
         -moz-appearance:textfield; /* Firefox */
-    }
-
-    #ThirdPage {
-        display: none;
-        flex-direction: column;
-    }
-
-    #ThirdPage label{
-        margin: 1em 0;
-    }
-
-    #ThirdPage span{
-        left: 10em;
-    }
-
-    #sub_button {
-        display: inline-block;
-    }
-
-    #last_buttons {
-        display: inline-block;
-    }
-    
-    #register_button {
-        float: right;
     }
 </style>
 
@@ -63,7 +38,7 @@
                 <input type="text" id="floor">
             <label><br>Postal Code</label>
                 <input type="text" pattern = "\d{4}-\d{3}" id="postal_code" required>
-            <br><input type="button" value="Continue" onclick="open_second_page()">
+            <br><input id="button" type="button" value="Continue" onclick="open_second_page()">
         </div>
         <!-- First form page -->
 
@@ -77,8 +52,8 @@
                 <input id="availability_start" type="date" required>
             <label><br>House available end</label>
                 <input id="availability_end" type="date" required>
-            <br><input type="button" value="Back" onclick="back_first_page()">
-            <input type="button" value="Continue" class="continue"  onclick="open_third_page()">
+            <br><input id="button" type="button" value="Back" onclick="back_first_page()">
+            <input id="button" type="button" value="Continue" class="continue"  onclick="open_third_page()">
         </div>
         <!-- Second form page -->
 
@@ -109,8 +84,8 @@
                 <span class="slider round"></span>
             </label>
             <div id="last_buttons">
-                <br><input type="button" value="Back" onclick="back_second_page()">
-                <input type="submit" id="register_btn" value="Register">
+                <br><input id="button" type="button" value="Back" onclick="back_second_page()">
+                <input id="button" type="submit" id="register_btn" value="Register">
             </div>
         </div>
         <!-- Third form page -->
