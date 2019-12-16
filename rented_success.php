@@ -55,7 +55,7 @@
             echo nl2br("Rented House successfuly with the following arguments:\n");
             echo "User: ",$email;
             echo nl2br("\n");
-            echo "Rented with house wtih id: ",$id;
+            echo "Rented house wtih id: ",$id;
             echo nl2br("\n");
             echo "With the following check-in date: ",$checkin;
             echo nl2br("\n");
