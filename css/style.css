@@ -550,9 +550,3 @@ input:checked + .slider:before {
         margin: 1em 0 0 0;
     }
 }
-
-@media screen and (min-width: 721px) and (max-width: 920px) {
-    #registerform {
-        height:42em;
-    }
-}

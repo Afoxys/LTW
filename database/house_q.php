@@ -40,7 +40,7 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
             $washing,
             0,
             $description,
-            1
+            'true'
         ));
         return 'OK';
     } catch (PDOException $e) {
@@ -50,6 +50,24 @@ function try_insert_house($title, $price, $city, $region, $country, $street, $do
             throw $e;
         }
     }
+}
+
+function update_house($id,$title, $price, $description, $beds) {
+
+    global $db;
+    $stmt = $db->prepare('UPDATE House SET
+                            title = ?,
+                            daily_price = ?,
+                            n_beds = ?,
+                            house_description = ?
+                        WHERE houseID = ?');
+    $stmt->execute(array(
+        $title,
+        $price,
+        $beds,
+        $description,
+        $id
+    ));
 }
 
 function try_get_house_by_id($id) {
