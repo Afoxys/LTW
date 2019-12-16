@@ -41,8 +41,6 @@
     #house_info article{
         display: row;
         max-width: 50%
-        /* flex-direction: row;
-        justify-content: space-between; */
     }
 
     #rent_info {
