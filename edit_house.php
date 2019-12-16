@@ -22,11 +22,12 @@
 ?> 
 
 <section id="registerform">
-    <form method="post">
+    <form method="post" action="actions/update_house.php">
 
             <h1>Edit your house listing</h1>
             <input type="button" id="open_form_button" value="open" onclick="open_form()">
             <input type="button" id="close_form_button" value="close" onclick="close_form()">
+            <input type="hidden" name="id" value="<?php echo $id ?>">
             <div id="form_display">
             <label><br>Title</label>
                 <input type="text" id="title" maxlength="64" placeholder="<?php echo $house_data['title']?>" required>
