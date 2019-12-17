@@ -24,8 +24,8 @@ body {font-family: 'Open Sans', sans-serif;}
 /* The login popup form - hidden by default */
 #account-popup {
     display: none;
-    position: fixed;
-    top: 49px;
+    position: absolute;
+    top: 50px;
     right: 0;
     z-index: 9;
 }
