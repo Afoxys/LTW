@@ -325,8 +325,13 @@ input:checked + .slider:before {
 
 
 /* House listing realted css */
+#house_simple_container { 
+    overflow-x: hidden;
+}
+
 .house_simple {
     text-decoration: none;
+    margin: 1em 0;
 }
 
 .house_simple:visited {

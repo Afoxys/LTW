@@ -23,8 +23,9 @@
     else
         $houses = get_all_houses_no_check($location, $guests, $max_price);
     
-    include_once('templates/search_filter.php');
+    include_once('templates/search_filter.php'); ?>
+    <div id="house_simple_container"> <?php
     include_once('templates/list_houses.php');
-    
-	include_once('templates/footer.php');
+    ?> </div>
+	<?php include_once('templates/footer.php');
 ?>
