@@ -3,13 +3,13 @@
 	include_once('templates/navbar.php');
     include_once('database/house_q.php');
     
-    $location = isset($_GET['location']) ? $_GET['location'] : '';
-    $checkin = isset($_GET['checkin']) ? $_GET['checkin'] : '';
-    $checkout = isset($_GET['checkout']) ? $_GET['checkout'] : '';
-    $guests = isset($_GET['guests']) ? $_GET['guests'] : 1;
-    $max_price = isset($_GET['max_price']) ? $_GET['max_price'] : -1;
+    $location = isset($_GET['location']) ? htmlentities($_GET['location'], ENT_QUOTES) : '';
+    $checkin = isset($_GET['checkin']) ? htmlentities($_GET['checkin'], ENT_QUOTES) : '';
+    $checkout = isset($_GET['checkout']) ? htmlentities($_GET['checkout'], ENT_QUOTES) : '';
+    $guests = isset($_GET['guests']) ? htmlentities($_GET['guests'], ENT_QUOTES) : 1;
+    $max_price = isset($_GET['max_price']) ? htmlentities($_GET['max_price'], ENT_QUOTES) : -1;
     if (isset($_GET['search_city'])) {
-        $location = $_GET['search_city'];
+        $location = htmlentities($_GET['search_city'], ENT_QUOTES);
     }
 
     if( !empty($_GET['search_city']) )

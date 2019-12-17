@@ -22,23 +22,6 @@
                 <input type="hidden" name="checkin" value="<?php echo $checkin?>">
                 <input type="hidden" name="checkout" value="<?php echo $checkout?>">
                 <input type="hidden" name="id" value="<?php echo $id?>">
-
-                <?php
-                    /*if( empty($checkout)){
-                        ?>
-                        <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
-                        <?php
-                    }
-
-                    else if(!empty($checkout)) {
-                        ?>
-                        <input type="hidden" name="checkin" value="<?php echo $checkin?>">
-                        <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-                        <input type="hidden" name="id" value="<?php echo $house['houseID']?>">
-                        <?php
-                    }*/
-                ?>
-                
                 <input type="submit" id="invisible_submit">
                 <article>
                     <header><?=$house['title']?></header>

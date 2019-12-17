@@ -2,13 +2,7 @@
 	//session_set_cookie_params(0, '/', '', false, true);
 	session_start();
 
-	include_once('../database/account_q.php');
-
-    $user_data = try_get_user($_SESSION['email']);
-
-	// function generate_random_token() {
-	// 	return bin2hex(openssl_random_pseudo_bytes(32));
-    // }
+    include_once('../database/account_q.php');
     
     function check_params($first, $last, $phone, $new_pwd, $curr_pwd, $hash) {
 
@@ -40,6 +34,12 @@
 		return 'OK';
 	}
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        header('Location: ../account_settings.php?code= failed');
+        return;
+    }
+
+    $user_data = try_get_user($_SESSION['email']);
 	
 	$first = !empty($_POST['firstname']) ? $_POST['firstname'] : $user_data['firstname'];
 	$last = !empty($_POST['lastname']) ? $_POST['lastname'] : $user_data['lastname'];
@@ -68,17 +68,5 @@
     }
     
     header('Location: ../account_settings.php?code= failed');
-
-
-	// if (!isset($_SESSION['csrf'])) {
-	//     $_SESSION['csrf'] = generate_random_token();
-	// }
-	
-	// session_regenerate_id(true);
-	// if (isset($_SESSION['email']))
-	// 	echo $_SESSION['email'];
-	// else
-	// 	$_SESSION['email'] = $userData['email'];
-	// return $userData;
 	
 ?>

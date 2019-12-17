@@ -7,13 +7,14 @@ function encode_for_ajax(data) {
 function try_login(login_form) {
     var email = login_form.email.value;
     var pwd = login_form.password.value;
+    var pre_csrf = login_form.pre_csrf.value;
 
-    if(email !== null && pwd !== null) {
+    if(email !== null && pwd !== null && pre_csrf !== null) {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () { login_success(request); };
         request.open("POST", "actions/login.php", true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(encode_for_ajax({email: email, pwd: pwd}));
+        request.send(encode_for_ajax({email: email, pwd: pwd, pre_csrf: pre_csrf}));
     }
 
     event.preventDefault();
@@ -67,20 +68,14 @@ function try_signup(signup_form) {
     var phone = signup_form.phone.value;
     var pwd = signup_form.password.value;
     var pwd_confirm = signup_form.passwordconfirm.value;
+    var pre_csrf = signup_form.pre_csrf.value;
 
-    console.log(email);
-    console.log(first);
-    console.log(last);
-    console.log(phone);
-    console.log(pwd);
-    console.log(pwd_confirm);
-
-    if(email !== null && first !== null && last !== null && pwd !== null && pwd_confirm !== null) {
+    if(email !== null && first !== null && last !== null && pwd !== null && pwd_confirm !== null && pre_csrf !== null) {
         var request = new XMLHttpRequest();
         request.onreadystatechange = function () { signup_success(request); };
         request.open("POST", "actions/register.php", true);
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        request.send(encode_for_ajax({email: email, first: first, last: last, phone: phone, pwd: pwd, pwd_confirm: pwd_confirm}));
+        request.send(encode_for_ajax({email: email, first: first, last: last, phone: phone, pwd: pwd, pwd_confirm: pwd_confirm, pre_csrf: pre_csrf}));
     }
 
     event.preventDefault();
@@ -163,14 +158,16 @@ function try_add_house(my_rent_container) {
     var low_mobility = my_rent_container.low_mobility.checked;
     var washing = my_rent_container.washing.checked;
 
-    if(floor === null) {
+    var csrf = my_rent_container.csrf.value;
+
+    if(floor == null || floor == "") {
         floor = "N/A";
     }
 
     if(title !== null && price !== null &&
         city !== null && region !== null && country !== null && street !== null && door !== null && postal !== null && 
         description !== null && beds !== null && 
-        pet !== null && kitchen !== null && wifi !== null && air_con !== null && low_mobility !== null && washing !== null
+        pet !== null && kitchen !== null && wifi !== null && air_con !== null && low_mobility !== null && washing !== null && csrf !== null
     ) {
 
         var request = new XMLHttpRequest();
@@ -179,7 +176,7 @@ function try_add_house(my_rent_container) {
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.send(encode_for_ajax({title: title, price: price, city: city, region: region, country: country, street: street,
             floor: floor, door: door, postal: postal, description: description, beds: beds, availability_start: availability_start, availability_end: availability_end,
-            pet: pet, kitchen: kitchen, wifi: wifi, air_con: air_con, low_mobility: low_mobility, washing: washing
+            pet: pet, kitchen: kitchen, wifi: wifi, air_con: air_con, low_mobility: low_mobility, washing: washing, csrf: csrf
         }));
     }
 

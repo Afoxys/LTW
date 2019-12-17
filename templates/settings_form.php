@@ -26,6 +26,12 @@
             <input type="password" name="new_pwd" placeholder="Minimum 8 caracters">
         <label><br>Type your current password in order to verify your changes:</label> 
             <input type="password" name="current_pwd" minlength="8" maxlength="128" placeholder="Current password">
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
         <br><button type="submit">Change</button>
+        <?php
+        if(isset($_GET['code'])) {
+            ?> <h3>Change <?php echo htmlentities($_GET['code'], ENT_QUOTES) ?> </h3> <?php
+        }
+    ?>
     </form>
 </section>

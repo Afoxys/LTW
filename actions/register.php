@@ -3,6 +3,10 @@
 	session_start();
 
     include_once('../database/account_q.php');
+
+    function generate_random_token() {
+		return bin2hex(openssl_random_pseudo_bytes(32));
+	}
     
     function check_params($email, $first, $last, $phone, $pwd, $pwd_confirm) {
 		if(empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -31,31 +35,39 @@
 		}
         
 		return 'OK';
-	}
+    }
+    
+    $success = false;
+    $msg = 'FAIL';
+    
+	if ($_SESSION['pre_csrf'] === $_POST['pre_csrf'] && !isset($_SESSION['email'])) {
+        $msg = 'OK';
+        $email = isset($_POST['email']) ? $_POST['email'] : '';
+        $first = isset($_POST['first']) ? $_POST['first'] : '';
+        $last = isset($_POST['last']) ? $_POST['last'] : '';
+        $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
+        $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
+        $pwd_confirm = isset($_POST['pwd_confirm']) ? $_POST['pwd_confirm'] : '';
 
-	$success = false;
-	$msg = 'OK';
-	
-	$email = isset($_POST['email']) ? $_POST['email'] : '';
-    $first = isset($_POST['first']) ? $_POST['first'] : '';
-    $last = isset($_POST['last']) ? $_POST['last'] : '';
-    $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
-    $pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
-    $pwd_confirm = isset($_POST['pwd_confirm']) ? $_POST['pwd_confirm'] : '';
-
-    $msg = check_params($email, $first, $last, $phone, $pwd, $pwd_confirm);
-
-    if($msg === 'OK') {
-        $msg = try_insert_user($email, $first, $last, $phone, $pwd);
+        $msg = check_params($email, $first, $last, $phone, $pwd, $pwd_confirm);
 
         if($msg === 'OK') {
-			session_regenerate_id(true);
+            $msg = try_insert_user($email, $first, $last, $phone, $pwd);
 
-			$success = true;
-            $_SESSION['email'] = $email;
-            $_SESSION['firstname'] = $first;
-		}
+            if($msg === 'OK') {
+                session_regenerate_id(true);
+
+                if (!isset($_SESSION['csrf'])) {
+                    $_SESSION['csrf'] = generate_random_token();
+                }
+
+                $success = true;
+                $_SESSION['email'] = $email;
+                $_SESSION['firstname'] = $first;
+            }
+        }
     }
+
     
     echo json_encode( array(
 		'success' 	=> $success,

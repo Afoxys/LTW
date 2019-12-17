@@ -24,46 +24,38 @@
 
 	$success = false;
 	$userData = NULL;
-	
-	$email = isset($_POST['email']) ? $_POST['email'] : '';
-	$pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
 
-	$msg = check_params($email, $pwd);
-	if($msg === 'OK') {
-		$userData = try_authentification($email, $pwd);
-	
-		if($userData !== NULL) {
-			session_regenerate_id(true);
-            
-            if (!isset($_SESSION['csrf'])) {
-                $_SESSION['csrf'] = generate_random_token();
-            }
-            
-			$_SESSION['email'] = $userData['email'];
-            $_SESSION['firstname'] = $userData['firstname'];
-            $success = true;
-		}
-		else {
-			$msg = 'Bad Login';
+	if ($_SESSION['pre_csrf'] === $_POST['pre_csrf']) {
+
+		$email = isset($_POST['email']) ? $_POST['email'] : '';
+		$pwd = isset($_POST['pwd']) ? $_POST['pwd'] : '';
+
+		$msg = check_params($email, $pwd);
+		if($msg === 'OK') {
+			$userData = try_authentification($email, $pwd);
+		
+			if($userData !== NULL) {
+				session_regenerate_id(true);
+				
+				if (!isset($_SESSION['csrf'])) {
+					$_SESSION['csrf'] = generate_random_token();
+				}
+				
+				$_SESSION['email'] = $userData['email'];
+				$_SESSION['firstname'] = $userData['firstname'];
+				$success = true;
+			}
+			else {
+				$msg = 'Bad Login';
+			}
 		}
 	}
+
 
 	echo json_encode( array(
 		'success' 	=> $success,
 		'msg' 		=> $msg,
 		'userData' 	=> $userData
 	));
-
-
-	// if (!isset($_SESSION['csrf'])) {
-	//     $_SESSION['csrf'] = generate_random_token();
-	// }
-	
-	// session_regenerate_id(true);
-	// if (isset($_SESSION['email']))
-	// 	echo $_SESSION['email'];
-	// else
-	// 	$_SESSION['email'] = $userData['email'];
-	// return $userData;
 	
 ?>

@@ -11,31 +11,19 @@ include_once('templates/navbar.php');
 
 include_once('database/house_q.php');
 
-$id = $_POST['id'];
+$id = htmlentities($_POST['id'], ENT_QUOTES);
 $count = try_get_image_count_by_id($id);
 $pathOriginal = "images/houses/h$id/originals/h$id";
 $pathMedium = "images/houses/h$id/medium/h$id-";
 
-$house_data = try_get_house_by_id($_POST['id']);
+$house_data = try_get_house_by_id($id);
 $email = (isset($_SESSION['email'])) ? $_SESSION['email'] : "";
 
-$house_rat = try_get_house_rating_by_id($_POST['id']);
-if($house_rat['avg_rat'] === NULL) {
-    $rating = 'No rating';
-} else {
-    $rating = $house_rat['avg_rat'];
-}
+$house_rat = try_get_house_rating_by_id($id);
+$rating = ($house_rat['avg_rat'] === NULL) ? 'No rating' : $house_rat['avg_rat'];
 
-if(empty($_POST['checkin'])){
-    $checkin="";
-    $checkout="";
-}
-
-else if(!empty($_POST['checkin'])) {
-    $checkin = $_POST['checkin'];
-    $checkout = $_POST['checkout'];
-}
-
+$checkin = (!empty($_POST['checkin'])) ? htmlentities($_POST['checkin'], ENT_QUOTES) : "";
+$checkout = (!empty($_POST['checkout'])) ? htmlentities($_POST['checkout'], ENT_QUOTES) : "";
 
 ?>
 
@@ -65,47 +53,54 @@ else if(!empty($_POST['checkin'])) {
                 <?php if($house_data['low_mobility'] === 'true') { ?> <li><i class="fas fa-wheelchair"></i> Low Mobility Access</li> <?php } ?>
                 <?php if($house_data['washing_machine'] === 'true') { ?> <li><i class="fa fa-tint"></i> Washing Machine</li> <?php } ?>
             </ul>
+            <p>Owner contact: <?php echo $house_data['owner']?></p>
+            <p>Price: <?php echo $house_data['daily_price']?> €/night</p>
         </div>
 
         <?php
-            if(empty($_POST['checkin']) || empty($_POST['checkout'])){
-            ?>
-            <div id="rent_info">
-                <p>Owner contact: <?php echo $house_data['owner']?></p>
-                <p>Price: <?php echo $house_data['daily_price']?> €/night</p>
-                <form action="rented_success.php" method="post" id="user_rent_action">
-                        <input type="hidden" name="email" value="<?php echo $email?>">
-                        <label>
-                            <br>Check-In <input id="checkin" type="date" name="checkin" value="<?php echo $checkin?>" required>
-                        </label>
-                        <br><label>
-                            <br>Check-Out <input id="checkout" type="date" name="checkout" value="<?php echo $checkout?>" required>
-                        </label>
-                        <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
-                        <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
-                        <input type="submit" id="rent_submit_button" value="Rent this house">
-                </form>
-            </div>
-    </div>
-           <?php
-        }
-            else if(!empty($_POST['checkin'])){
+
+            if($house_data['owner'] != $_SESSION['email']) {
+
+                if(empty($checkin) || empty($checkout)){
                 ?>
                 <div id="rent_info">
-                    <p>Owner contact: <?php echo $house_data['owner']?></p>
-                    <p>Price: <?php echo $house_data['daily_price']?> €/night</p>
+                    <!-- <p>Owner contact: <?php //echo $house_data['owner']?></p>
+                    <p>Price: <?php //echo $house_data['daily_price']?> €/night</p> -->
                     <form action="rented_success.php" method="post" id="user_rent_action">
-                        <input type="hidden" name="email" value="<?php echo $email?>">
-                        <input type="hidden" name="checkin" value="<?php echo $checkin?>" >
-                        <input type="hidden" name="checkout" value="<?php echo $checkout?>">
-                        <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
-                        <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
-                        <input type="submit" id="rent_submit_button" value="Rent this house">
+                            <input type="hidden" name="email" value="<?php echo $email; ?>">
+                            <label>
+                                <br>Check-In <input id="checkin" type="date" name="checkin" value="<?php echo $checkin; ?>" required>
+                            </label>
+                            <br><label>
+                                <br>Check-Out <input id="checkout" type="date" name="checkout" value="<?php echo $checkout; ?>" required>
+                            </label>
+                            <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
+                            <input type="submit" id="rent_submit_button" value="Rent this house">
                     </form>
                 </div>
         </div>
-            <?php
-        }
+               <?php
+            }
+                else if(!empty($checkin) && !empty($checkout)){
+                    ?>
+                    <div id="rent_info">
+                        <!-- <p>Owner contact: <?php //echo $house_data['owner']?></p>
+                        <p>Price: <?php //echo $house_data['daily_price']?> €/night</p> -->
+                        <form action="rented_success.php" method="post" id="user_rent_action">
+                            <input type="hidden" name="email" value="<?php echo $email?>">
+                            <input type="hidden" name="checkin" value="<?php echo $checkin?>" >
+                            <input type="hidden" name="checkout" value="<?php echo $checkout?>">
+                            <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
+                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
+                            <input type="submit" id="rent_submit_button" value="Rent this house">
+                        </form>
+                    </div>
+            </div>
+                <?php
+            }
+            }
+
     ?>
 
 

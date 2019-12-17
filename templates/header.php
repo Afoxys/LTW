@@ -1,6 +1,14 @@
 <?php
 	//session_set_cookie_params(0, '/', '', false, true);
 	session_start();
+
+	function generate_random_token() {
+		return bin2hex(openssl_random_pseudo_bytes(32));
+	}
+
+	if (!isset($_SESSION['pre_csrf']) && !isset($_SESSION['email'])) {
+		$_SESSION['pre_csrf'] = generate_random_token();
+	}
 ?>
 
 <!DOCTYPE html>

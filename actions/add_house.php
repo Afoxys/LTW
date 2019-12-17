@@ -70,45 +70,49 @@
 	}
 
 	$success = false;
-    $msg = 'OK';
-    $id = '-1';
-	
-	$title = isset($_POST['title']) ? $_POST['title'] : '';
-	$price = isset($_POST['price']) ? $_POST['price'] : '';
-	$city = isset($_POST['city']) ? $_POST['city'] : '';
-	$region = isset($_POST['region']) ? $_POST['region'] : '';
-	$country = isset($_POST['country']) ? $_POST['country'] : '';
-	$street = isset($_POST['street']) ? $_POST['street'] : '';
-	$door = isset($_POST['door']) ? $_POST['door'] : '';
-	$floor = isset($_POST['floor']) ? $_POST['floor'] : 'N/A';
-	$postal = isset($_POST['postal']) ? $_POST['postal'] : '';
-	$description = isset($_POST['description']) ? $_POST['description'] : '';
-	$beds = isset($_POST['beds']) ? $_POST['beds'] : '';
-	$start = isset($_POST['availability_start']) ? strtotime($_POST['availability_start']) : '';
-	$end = isset($_POST['availability_end']) ? strtotime($_POST['availability_end']) : '';
-	$pet = isset($_POST['pet']) ? $_POST['pet'] : false;
-	$kitchen = isset($_POST['kitchen']) ? $_POST['kitchen'] : false;
-	$wifi = isset($_POST['wifi']) ? $_POST['wifi'] : false;
-	$air_con = isset($_POST['air_con']) ? $_POST['air_con'] : false;
-	$low_mobility = isset($_POST['low_mobility']) ? $_POST['low_mobility'] : false;
-	$washing = isset($_POST['washing']) ? $_POST['washing'] : false;
+	$msg = 'FAIL';
+	$id = '-1';
 
-    $msg = check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal, 
-                        $description, $beds, $start, $end,
-						$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
+	if ($_SESSION['csrf'] === $_POST['csrf']) {
+		
+		$msg = 'OK';
+		$title = isset($_POST['title']) ? $_POST['title'] : '';
+		$price = isset($_POST['price']) ? $_POST['price'] : '';
+		$city = isset($_POST['city']) ? $_POST['city'] : '';
+		$region = isset($_POST['region']) ? $_POST['region'] : '';
+		$country = isset($_POST['country']) ? $_POST['country'] : '';
+		$street = isset($_POST['street']) ? $_POST['street'] : '';
+		$door = isset($_POST['door']) ? $_POST['door'] : '';
+		$floor = (isset($_POST['floor']) || empty($_POST['floor'])) ? $_POST['floor'] : 'N/A';
+		$postal = isset($_POST['postal']) ? $_POST['postal'] : '';
+		$description = isset($_POST['description']) ? $_POST['description'] : '';
+		$beds = isset($_POST['beds']) ? $_POST['beds'] : '';
+		$start = isset($_POST['availability_start']) ? strtotime($_POST['availability_start']) : '';
+		$end = isset($_POST['availability_end']) ? strtotime($_POST['availability_end']) : '';
+		$pet = isset($_POST['pet']) ? $_POST['pet'] : false;
+		$kitchen = isset($_POST['kitchen']) ? $_POST['kitchen'] : false;
+		$wifi = isset($_POST['wifi']) ? $_POST['wifi'] : false;
+		$air_con = isset($_POST['air_con']) ? $_POST['air_con'] : false;
+		$low_mobility = isset($_POST['low_mobility']) ? $_POST['low_mobility'] : false;
+		$washing = isset($_POST['washing']) ? $_POST['washing'] : false;
 
-	if($msg === 'OK') {
-
-		// insert house
-		$msg = try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal,
-		$description, $beds, $start, $end,
-		$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
+		$msg = check_params($title, $price, $city, $region, $country, $street, $door, $floor, $postal, 
+							$description, $beds, $start, $end,
+							$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
 
 		if($msg === 'OK') {
-			$success = true;
-            $id = get_last_house_id();
+
+			// insert house
+			$msg = try_insert_house($title, $price, $city, $region, $country, $street, $door, $floor, $postal,
+			$description, $beds, $start, $end,
+			$pet, $kitchen, $wifi, $air_con, $low_mobility, $washing);
+
+			if($msg === 'OK') {
+				$success = true;
+				$id = get_last_house_id();
+			}
 		}
-	}
+    }
     
     
 	echo json_encode( array(

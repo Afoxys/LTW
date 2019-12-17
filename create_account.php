@@ -23,6 +23,8 @@
             <br><label for="passwordconfirm">Confirm password</label>
             <input type="password" id="passwordconfirm">
 
+            <input type="hidden" id="pre_csrf" value="<?php echo $_SESSION['pre_csrf'] ?>">
+
             <br><button type="submit" id="register-btn">Register</button>
         </form>
     </div>

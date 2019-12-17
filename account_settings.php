@@ -14,10 +14,4 @@ $user_data = try_get_user($_SESSION['email']);
 	<?php include_once('templates/navbar.php'); ?>
 	<?php include_once('templates/settings_form.php'); ?>
 </div>
-<?php
-    if(isset($_GET['code'])) {
-        ?> <h3>Change <?php echo $_GET['code'] ?> </h3> <?php
-    }
-?>
-
 <?php include_once('templates/footer.php'); ?>

@@ -35,7 +35,7 @@
 
 <?php 
 
-    $id = $_POST['id'];
+    $id = htmlentities($_POST['id'], ENT_QUOTES);
     $active = $_POST['active'];
     $house_data = try_get_house_by_id($id);
 ?> 
@@ -56,6 +56,7 @@
         </div>
         <label><br>Number of beds</label>
             <input type="number" name="bed_number" min="1" value="<?php echo $house_data['n_beds']?>">
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
         <br><input type="submit" id="register_btn" value="Edit">
         <input type="button" id="close_form_button" value="Close" onclick="close_form()">
         </div>
@@ -79,6 +80,7 @@
     <form action="actions/remove_house.php" method="post">
     <input type="hidden" name="active" value="false">
     <input type="hidden" name="id"  value="<?php echo $id?>">
+    <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
     <label></label><br>
     <input type="submit" value="Stop">
     </form>
@@ -92,7 +94,8 @@
     <h2>Start renting your house</h2>
     <form action="actions/remove_house.php" method="post">
     <input type="hidden" name="active" value="true">
-    <input type="hidden" name="id"  value="<?php echo $id?>">  
+    <input type="hidden" name="id"  value="<?php echo $id?>">
+    <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
     <label></label><br>
     <input type="submit" value="Start">
     </form>

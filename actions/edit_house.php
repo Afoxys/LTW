@@ -1,4 +1,7 @@
 <?php
+
+	session_start();
+
 	include_once('../database/house_q.php');
 	
     function check_params($title, $price, $description, $beds) {
@@ -23,6 +26,11 @@
     $msg = 'OK';
     $id = $_POST['id'];
 	
+	if ($_SESSION['csrf'] !== $_POST['csrf']) {
+		header("Location: ../index.php");
+		return;
+	}
+
 	$title = isset($_POST['title']) ? $_POST['title'] : '';
 	$price = isset($_POST['daily_price']) ? $_POST['daily_price'] : '';
 	$description = isset($_POST['description']) ? $_POST['description'] : '';

@@ -85,6 +85,7 @@
             </label>
             <div id="last_buttons">
                 <br><input id="button" type="button" value="Back" onclick="back_second_page()">
+                <input type="hidden" id="csrf" value="<?php echo $_SESSION['csrf'] ?>">
                 <input id="button" type="submit" id="register_btn" value="Register">
             </div>
         </div>

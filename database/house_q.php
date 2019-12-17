@@ -250,7 +250,7 @@ function try_rent_house($email, $id, $checkin, $checkout) {
     $checkin = strtotime($checkin);
     $checkout = strtotime($checkout);
 
-    $stmt = $db->prepare('INSERT INTO Rent (user,house,rent_start,rent_end)  VALUES (?, ?, ?, ?)');
+    $stmt = $db->prepare('INSERT INTO Rent (user,house,rent_start,rent_end) VALUES (?, ?, ?, ?)');
     $stmt->execute(array(
         $email,
         $id,
