@@ -18,6 +18,7 @@ $pathMedium = "images/houses/h$id/medium/h$id-";
 
 $house_data = try_get_house_by_id($id);
 $email = (isset($_SESSION['email'])) ? $_SESSION['email'] : "";
+$csrf = (empty($email)) ? $_SESSION['pre_csrf'] : $_SESSION['csrf'];
 
 $house_rat = try_get_house_rating_by_id($id);
 $rating = ($house_rat['avg_rat'] === NULL) ? 'No rating' : $house_rat['avg_rat'];
@@ -59,7 +60,7 @@ $checkout = (!empty($_POST['checkout'])) ? htmlentities($_POST['checkout'], ENT_
 
         <?php
 
-            if($house_data['owner'] != $_SESSION['email']) {
+            if($house_data['owner'] != $email && !empty($email)) {
 
                 if(empty($checkin) || empty($checkout)){
                 ?>
@@ -75,7 +76,7 @@ $checkout = (!empty($_POST['checkout'])) ? htmlentities($_POST['checkout'], ENT_
                                 <br>Check-Out <input id="checkout" type="date" name="checkout" value="<?php echo $checkout; ?>" required>
                             </label>
                             <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
-                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
+                            <input type="hidden" name="csrf" value="<?php echo $csrf ?>">
                             <input type="submit" id="rent_submit_button" value="Rent this house">
                     </form>
                 </div>
@@ -92,7 +93,7 @@ $checkout = (!empty($_POST['checkout'])) ? htmlentities($_POST['checkout'], ENT_
                             <input type="hidden" name="checkin" value="<?php echo $checkin?>" >
                             <input type="hidden" name="checkout" value="<?php echo $checkout?>">
                             <input type="hidden" name="id" value="<?php echo $house_data['houseID']?>">
-                            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'] ?>">
+                            <input type="hidden" name="csrf" value="<?php echo $csrf ?>">
                             <input type="submit" id="rent_submit_button" value="Rent this house">
                         </form>
                     </div>

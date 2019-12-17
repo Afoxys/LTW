@@ -39,7 +39,7 @@
             echo htmlspecialchars($price, ENT_QUOTES); ?>">
         </label>
         <label>
-            <br>Guests <input type="number" name="guests" min="1" value="<?php echo htmlspecialchars($guests, ENT_QUOTES); ?>">
+            <br>Min Guests <input type="number" name="guests" min="1" value="<?php echo htmlspecialchars($guests, ENT_QUOTES); ?>">
         </label>
         <label>
             <input id="search" type="submit" value="Search">

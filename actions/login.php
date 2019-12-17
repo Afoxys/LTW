@@ -24,6 +24,7 @@
 
 	$success = false;
 	$userData = NULL;
+	$msg = "FAIL";
 
 	if ($_SESSION['pre_csrf'] === $_POST['pre_csrf']) {
 

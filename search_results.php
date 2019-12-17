@@ -6,7 +6,7 @@
     $location = isset($_GET['location']) ? htmlentities($_GET['location'], ENT_QUOTES) : '';
     $checkin = isset($_GET['checkin']) ? htmlentities($_GET['checkin'], ENT_QUOTES) : '';
     $checkout = isset($_GET['checkout']) ? htmlentities($_GET['checkout'], ENT_QUOTES) : '';
-    $guests = isset($_GET['guests']) ? htmlentities($_GET['guests'], ENT_QUOTES) : 1;
+    $guests = (isset($_GET['guests']) && !empty($_GET['guests'])) ? htmlentities($_GET['guests'], ENT_QUOTES) : 1;
     $max_price = isset($_GET['max_price']) ? htmlentities($_GET['max_price'], ENT_QUOTES) : -1;
     if (isset($_GET['search_city'])) {
         $location = htmlentities($_GET['search_city'], ENT_QUOTES);
