@@ -504,11 +504,11 @@ input:checked + .slider:before {
 #house_thumb {
     display: flex;
     flex-wrap: wrap;
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 #house_image {
-    margin-left: 20%;
+    margin-left: 10%;
 }
 
 #house_title {
@@ -518,7 +518,7 @@ input:checked + .slider:before {
 
 #house_info {
     width: 60%;
-    margin: 2% 20%;
+    margin: 2% 10%;
 }
 
 #star {
@@ -527,12 +527,12 @@ input:checked + .slider:before {
 
 #Amenities {
     width: 20%;
-    margin: 2% 20%;
+    margin: 2% 10%;
 }
 
 #rent_info {
     width: 60%;
-    margin: 2% 20%;
+    margin: 2% 10%;
 }
 
 #rent_submit_button {

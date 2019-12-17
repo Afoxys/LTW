@@ -17,9 +17,7 @@ $pathOriginal = "images/houses/h$id/originals/h$id";
 $pathMedium = "images/houses/h$id/medium/h$id-";
 
 $house_data = try_get_house_by_id($_POST['id']);
-if( isset($_SESSION['email'])){
-    $email = $_SESSION['email'];
-}
+$email = (isset($_SESSION['email'])) ? $_SESSION['email'] : "";
 
 $house_rat = try_get_house_rating_by_id($_POST['id']);
 if($house_rat['avg_rat'] === NULL) {
@@ -29,6 +27,8 @@ if($house_rat['avg_rat'] === NULL) {
 }
 
 if(empty($_POST['checkin'])){
+    $checkin="";
+    $checkout="";
 }
 
 else if(!empty($_POST['checkin'])) {
