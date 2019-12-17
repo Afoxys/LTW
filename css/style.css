@@ -510,7 +510,6 @@ input:checked + .slider:before {
 #house_image {
     margin-left: 10%;
     max-width: 80%;
-    max-height: 80%;
 }
 
 #house_title {
