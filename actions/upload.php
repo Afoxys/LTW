@@ -49,6 +49,6 @@
   echo ($count + 1);
   $msg = update_image_count_by_id($id, ($count+1));
 
-  header("Location: ../edit_house.php");
+  header("Location: ../manage_my_houses.php");
 
 ?>
