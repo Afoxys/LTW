@@ -1,8 +1,8 @@
 Group: 13
 
 Afonso Carvalho Pereira de Sá - up201604605
-João Ricardo Ribeiro Cardoso - up200900303
-Nelson Alexandre Saraiva Gregório - up201705149
+João Ricardo Ribeiro Cardoso - up201705149
+Nelson Alexandre Saraiva Gregório - up200900303
 
 Effort:
 Afonso - 33,3%
